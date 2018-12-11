@@ -4,7 +4,7 @@ def kaart_uitleggen():
     #textSize(13.5)
     #loadFont("TimesNewRomanPSMT-48.vlw")
     # global Font
-    Font = createFont ("Arial Bold Italic", 13.5)
+    Font = createFont ("Arial Bold Italic", 14)
     textFont(Font)
     textAlign (LEFT)
     Aas = text(" Een pion uit het\n startveld op eigen\n startpositie (vlag\n icoontje) zetten of\n een pion een plaats\n vooruit zetten.",0,150)
@@ -17,10 +17,10 @@ def kaart_uitleggen():
     Acht = text(" Bij deze kaart moet\n je je pion acht\n stappen vooruit\n zetten.",150*2,360)
     Negen = text(" Bij deze kaart moet\n je je pion negen\n stappen vooruit\n zetten.",150*3,360)
     Tien =  text(" Bij deze kaart moet\n je je pion tien\n stappen vooruit\n zetten.",150*4,360)
-    Boer = text(" Een eigen pion\n met een pion van\n een andere speler\n omruilen.",0)
+    Boer = text(" Een eigen pion\n met een pion van\n een andere speler\n omruilen.",0,560)
    
-    Vrouw = text(" Een pion twaalf\n plaatsen vooruit\n zetten.",150,635)
-    Heer = text(" Een pion uit het\n startveld op eigen\n startpositie(vlag\n icoontje) zetten.",150*2,630)
+    Vrouw = text(" Een pion twaalf\n plaatsen vooruit\n zetten.",150,560)
+    Heer = text(" Een pion uit het\n startveld op eigen\n startpositie(vlag\n icoontje) zetten.",150*2,560)
 def setup():
     global kaart
     size(800,800)
