@@ -16,6 +16,7 @@ def setup():
         fill(0)
         text(names[x], 50+(x*150), 30, 100, 50)
         textAlign(CENTER)
+
 def mousePressed():
     global tabs
     if mouseButton == LEFT:
