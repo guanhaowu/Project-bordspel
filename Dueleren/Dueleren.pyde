@@ -2,20 +2,25 @@ from random import randint
 number = 0
 dice = []
 diceRes= []
-diceCount= 4
+diceCount= 5
 activeTab = 'Dice'
 def setup():
     global dice
     size(800,800)
-    background(100,100,100)
-    dice.append(loadImage("dice.jpg"))
-    
+    background(loadImage("background.png"))
+    dice.append(loadImage("wit.jpg"))
+    fill(255)
+    textSize(30)
+    text('Speler 1',50,200,150,50)
+    textAlign(CENTER)
     image(dice[0], 20, 300)
     for i in range(1,7):
-       dice.append(loadImage(str(i)+".jpg"))
+       dice.append(loadImage(str(i)+".png"))
     # noLoop()
     
+    
 
+    
     
     
 def draw_buttons(x,y,width,height):
@@ -35,7 +40,6 @@ def draw_textbox(word, R, G, B, fsize, align, x, y, width, height):
     textSize(fsize)
     fill(R,G,B)   
     text(word,x,y, width, height)
-    noFill()
     
 
 def mousePressed():
@@ -71,9 +75,6 @@ def draw():
     layout()
     if activeTab == "Duel":
         draw_buttons(60,60,200,40)
-            
-
-    redraw()
     x = 0         
     for a in diceRes:
         if a != 0:
