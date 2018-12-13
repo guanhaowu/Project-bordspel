@@ -1,6 +1,5 @@
 tabs = [0, 1, 2, 3, 4]
 names = ['Spelergegevens', 'Duel', 'Rad', 'Kaartregels', 'Rad']
-click = 0
 def setup():
     size(800, 800)
     background(0)
@@ -20,19 +19,19 @@ def setup():
 def mousePressed():
     global tabs
     if mouseButton == LEFT:
-        if((mouseX > 50)) and (mouseX < 150)) and (mouseY > 10) and (mouseY < 60))): 
+        if((mouseX > 50) and (mouseX < 150) and (mouseY > 10) and (mouseY < 60)): 
             fill(180)
             rect(0,100,800,800)
-        if((mouseX > 200)) and (mouseX < 300)) and (mouseY > 10) and (mouseY < 60))):
+        if((mouseX > 200) and (mouseX < 300) and (mouseY > 10) and (mouseY < 60)):
             fill(180)
             rect(0,100,800,800)
-        if((mouseX > 350)) and (mouseX < 450)) and (mouseY > 10) and (mouseY < 60))):
+        if((mouseX > 350) and (mouseX < 450) and (mouseY > 10) and (mouseY < 60)):
             fill(180)
             rect(0,100,800,800)
-        if((mouseX > 500)) and (mouseX < 600)) and (mouseY > 10) and (mouseY < 60))):
+        if((mouseX > 500) and (mouseX < 600) and (mouseY > 10) and (mouseY < 60)):
             fill(180)
             rect(0,100,800,800)
-        if((mouseX > 650)) and (mouseX < 750)) and (mouseY > 10) and (mouseY < 60))):
+        if((mouseX > 650) and (mouseX < 750) and (mouseY > 10) and (mouseY < 60)):
             fill(180)
             rect(0,100,800,800)
 

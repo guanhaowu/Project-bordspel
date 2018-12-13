@@ -1,17 +1,35 @@
 tabs = [0, 1, 2, 3, 4]
 names = ['Spelergegevens', 'Duel', 'Rad', 'Kaartregels', 'Rad']
-click = 0
+activeTab = 0
+def active(tab):
+    background(0,255,0)
+    fill(255,255,0)
+    stroke(150)
+    rect(50+(tab*150), 10, 125, 50, 10)
+    noFill()
+
 def Spelergegevens():
-    background (139,87,66)
+    global activeTab
+    activeTab = 0
+
+    
+
 
 def Duel():
-    background (255,235,205)
+    global activeTab
+    activeTab = 1
+
+    
 
 def Rad1():
-    background (178,223,238)
+    global activeTab
+    activeTab = 2
+
 def Kaartregels():
      global kaart
+     global activeTab
      kaart = []
+     activeTab = 3
      for i in range (1,14):
          kaart.append(loadImage(str(i)+".jpg"))
      background(loadImage("backgroundd.jpg"))
@@ -39,7 +57,9 @@ def Kaartregels():
      Vrouw = text(" Een pion twaalf\n plaatsen vooruit\n zetten.",150,560)
      Heer = text(" Een pion uit het\n startveld op eigen\n startpositie(vlag\n icoontje) zetten.",150*2,560)
 def Rad2():
-    background(125,158,192)
+    global activeTab
+    activeTab = 4
+
 
     
 def setup():
@@ -48,38 +68,36 @@ def setup():
     noStroke()
     fill(102)
 
-def rectangel():
+def menu():
     global names
     global tabs
     for tab in tabs:
-        fill(139,0,0)
         stroke(150)
-        rect(50+tabs[tab]*150, 10, 100, 50)
+        rect(50+tabs[tab]*150, 10, 125, 50, 10)
     for x in range(len(names)):   
         fill(252,252,252)
         Font = createFont ("Arial Bold Italic", 13)
         textFont(Font)
         textAlign(CENTER)
-        text(names[x], 50+(x*150), 30, 100, 50)
+        text(names[x], 50+(x*150), 30, 125, 50)
 def mousePressed():
     global tabs
     if mouseButton == LEFT:
-        if mouseX > 50 and mouseX < 150 and mouseY > 10 and mouseY < 60:
+        if mouseX > 50 and mouseX < 175 and mouseY > 10 and mouseY < 60:
             Spelergegevens()
-        if mouseX > 200 and mouseX < 300 and mouseY > 10 and mouseY < 60:
+        if mouseX > 200 and mouseX < 325 and mouseY > 10 and mouseY < 60:
             Duel()
-        if mouseX > 350 and mouseX < 450 and mouseY > 10 and mouseY < 60:
+        if mouseX > 350 and mouseX < 475 and mouseY > 10 and mouseY < 60:
             Rad1()
-        if mouseX > 500 and mouseX < 600 and mouseY > 10 and mouseY < 60:   
+        if mouseX > 500 and mouseX < 625 and mouseY > 10 and mouseY < 60:   
             Kaartregels()
-        if mouseX > 650 and mouseX < 750 and mouseY > 10 and mouseY < 60: 
+        if mouseX > 650 and mouseX < 775 and mouseY > 10 and mouseY < 60: 
             Rad2()
         
 
             
 def draw():
     mousePressed()
-    rectangel()
-
+    active(activeTab)
+    menu()
     
-            
