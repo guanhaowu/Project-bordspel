@@ -1,5 +1,5 @@
 tabs = [0, 1, 2, 3, 4]
-names = ['Spelergegevens', 'Duel', 'Rad', 'Kaartregels', 'Name']
+tabNames = ['Spelergegevens', 'Duel', 'Rad', 'Kaartregels', 'Name']
 activeTab = 0
 kaart = []
 def active(tab):
@@ -80,21 +80,21 @@ def setup():
     for i in range (1,14):
         kaart.append(loadImage(str(i)+".jpg"))    
 
-def menu():
+def menuButton():
     global tabs
     for tab in tabs:
         fill(150)
         stroke(150)
         rect(50+tabs[tab]*150, 10, 125, 50, 10)
         noFill()
-def menutext():
-    global names
-    for x in range(len(names)):   
+def menuText():
+    global tabNames
+    for x in range(len(tabNames)):   
         fill(252,252,252)
         Font = createFont ("Arial Bold Italic", 13)
         textFont(Font)
         textAlign(CENTER)
-        text(names[x], 50+(x*150), 30, 125, 50)
+        text(tabNames[x], 50+(x*150), 30, 125, 50)
         noFill()
 
 
@@ -123,6 +123,6 @@ def mousePressed():
 def draw():
     background(loadImage("backgroundd.jpg"))
     mousePressed()
-    menu()
+    menuButton()
     active(activeTab)
-    menutext()
+    menuText()
