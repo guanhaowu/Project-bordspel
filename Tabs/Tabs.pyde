@@ -1,7 +1,18 @@
+#screensize:
+screen_xSize = 1000
+screen_ySize = 800
 tabs = [0, 1, 2, 3, 4]
-names = ['Spelergegevens', 'Duel', 'Rad', 'Kaartregels', 'Name']
+tabNames = ['Spelergegevens', 'Duel', 'Rad', 'Kaartregels', 'Name']
 activeTab = 0
 kaart = []
+
+def draw_bg(x):
+    global screen_xSize
+    global screen_ySize
+    global bg_img
+    x.resize(screen_xSize, screen_ySize)
+    return bg_img
+
 def active(tab):
     fill(255,255,0)
     stroke(150)
@@ -34,7 +45,6 @@ def Kaartregels():
     global kaart
     global activeTab
     activeTab = 3
-     
      
     j = 0
     for heigh in range(4):
@@ -71,30 +81,32 @@ def Names():
 
     
 def setup():
+    global screen_xSize, screen_ySize
     global kaart
-    size(800, 800)
-    background(0)
+    global bg_img
+    size(screen_xSize, screen_ySize)
+    bg_img = loadImage("background_img.png")
     noStroke()
-    fill(102)
 
     for i in range (1,14):
         kaart.append(loadImage(str(i)+".jpg"))    
 
-def menu():
+def menuButton():
     global tabs
     for tab in tabs:
         fill(150)
         stroke(150)
         rect(50+tabs[tab]*150, 10, 125, 50, 10)
         noFill()
-def menutext():
-    global names
-    for x in range(len(names)):   
+
+def menuText():
+    global tabNames
+    for x in range(len(tabNames)):   
         fill(252,252,252)
         Font = createFont ("Arial Bold Italic", 13)
         textFont(Font)
         textAlign(CENTER)
-        text(names[x], 50+(x*150), 30, 125, 50)
+        text(tabNames[x], 50+(x*150), 30, 125, 50)
         noFill()
 
 
@@ -121,8 +133,9 @@ def mousePressed():
 
             
 def draw():
-    background(loadImage("backgroundd.jpg"))
+    global bg_img
+    background(draw_bg(bg_img))
     mousePressed()
-    menu()
+    menuButton()
     active(activeTab)
-    menutext()
+    menuText()
