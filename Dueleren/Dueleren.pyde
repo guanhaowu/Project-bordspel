@@ -1,5 +1,7 @@
 from random import randint
 number = 0
+tabs= [0,1]
+choices= ['3 dobbelstenen','4 dobbelstenen']
 dice = []
 diceRes= []
 diceCount= 5
@@ -7,19 +9,48 @@ activeTab = 'Dice'
 def setup():
     global dice
     size(800,800)
-    background(loadImage("background.png"))
-    dice.append(loadImage("wit.jpg"))
+    background(loadImage('background.png'))
+    dice.append(loadImage( "wit.jpg"))
     fill(255)
     textSize(30)
-    text('Speler 1',50,200,150,50)
+    text('Aanvaller',50,200,150,50)
+    textAlign(CENTER)
+    text('Verdediger',50,500,150,50)
     textAlign(CENTER)
     image(dice[0], 20, 300)
+    image(dice[0],20,600)
     for i in range(1,7):
        dice.append(loadImage(str(i)+".png"))
     # noLoop()
+
+def dobbelsDrie():
+    global activeTab
+    activeTab= 0
+    noLoop()
     
+def dobbelsVier():
+    global activeTab
+    activeTab= 1
+    noLoop()
     
 
+def menu():
+    global tabs
+    for tab in tabs:
+        fill(150)
+        stroke(150)
+        rect(300+tabs[tab]*150, 200,130,50 , 150)
+        noFill()    
+    
+def menutext():
+    global choices
+    for x in range(len(choices)):   
+        fill(252,252,252)
+        Font = createFont ("Arial Bold Italic", 13)
+        textFont(Font)
+        textAlign(CENTER)
+        text(choices[x], 300+(x*150), 215, 130, 50)
+        noFill()
     
     
     
@@ -66,7 +97,7 @@ def roll_dice():
 def layout():
     global activeTab
     if activeTab == 'Dice':
-        draw_textbox("Start the Duel", 0, 0, 0, 28, (CENTER, CENTER), 60, 60, 200, 40)
+        draw_textbox("Start het Duel", 0, 0, 0, 28, (CENTER, CENTER), 60, 60, 200, 40)
             
 def draw():
     global diceRes
@@ -81,4 +112,5 @@ def draw():
             image(dice[a],20+(x*210),300)
             x+=1 
 
-    
+    menu()
+    menutext()
