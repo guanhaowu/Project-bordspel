@@ -5,8 +5,10 @@ buttonWidth = 12.5
 buttonHeight = 5
 tabs = [0, 1, 2, 3, 4]
 tabNames = ['Spelergegevens', 'Duel', 'Rad', 'Kaartregels', 'Name']
+spelerNamen = {"speler1":"", "speler2":"", "speler3":"", "speler4":""}
 activeTab = 0
 kaart = []
+selected_field = None
 
 def draw_bg(x, screen_xSize, screen_ySize):
     redraw()
@@ -20,6 +22,12 @@ def active(tab):
     stroke(150)
     rect(50+(tab*150), 10, 125, 50, 10)
     noFill()
+
+
+def fonts(font_type,font_size, state):
+    return textFont(createFont(font_type,font_size, state))
+
+
 
 def Spelergegevens():
     fill(0)
@@ -57,8 +65,7 @@ def Kaartregels():
                 card+=1
 
     fill(140,0,0)
-    Font = createFont ("Arial Bold Italic", 14)
-    textFont(Font)
+    fonts("Arial Bold Italic", 14, True)
     textAlign (LEFT)
     # text box with auto wrap (x,y, from x, from y)
     Aas = "Een pion uit het startveld op eigen startpositie (vlag icoontje) zetten of een pion 1 plaats vooruit zetten." 
@@ -84,11 +91,41 @@ def Kaartregels():
 
 
 def Names():
-    fill(0)
-    #code
-    noFill()
-
+    global spelerNamen
     
+    def field_colors(field):
+        if field == 1: return fill(255,0,0)
+        if field == 2: return fill(0,255,0)
+        if field == 3: return fill(50,70,255)
+        if field == 4: return fill(255,255,0)
+        
+    textAlign(CENTER)
+    stroke(0,0,0)
+    fill(0,0,0)
+    rect(90,120,508,20)
+    fill(255,255,255)
+    fonts("Arial Bold", 18, True)
+    text("Vul uw naam hier onder in:", 200, 120, 398,25)
+    noFill()
+    noStroke()
+    
+    fonts("Arial", 16, True)
+    for x in range(len(spelerNamen)):
+        stroke(0,0,0)
+        field_colors(x+1)
+        rect(90, 140+(x*20), 108, 20)  #column 1
+        fill(255,255,255)
+        rect(198, 140+(x*20), 400, 20) #column 2
+        noFill()
+        noStroke()
+
+    for x in range(len(spelerNamen)):
+        fill(0,0,0)
+        textAlign(LEFT)
+        text("speler" + str(x+1), 100, 155+(x*20))
+        text(str(spelerNamen["speler"+str(x+1)]), 200, 155+(x*20))
+        noFill()
+
 def setup():
     global screen_xSize, screen_ySize
     global kaart
@@ -113,8 +150,7 @@ def menuText():
     global tabNames
     for x in range(len(tabNames)):   
         fill(252,252,252)
-        Font = createFont ("Arial Bold Italic", 13)
-        textFont(Font)
+        fonts("Arial Bold Italic", 13, True)
         textAlign(CENTER)
         text(tabNames[x], 50+(x*150), 30, 125, 50)
         noFill()
@@ -122,6 +158,7 @@ def menuText():
 
 def mousePressed():
     global activeTab
+    global selected_field
     if mouseButton == LEFT:
         if mouseX > 50 and mouseX < 175 and mouseY > 10 and mouseY < 60:
             activeTab = 0
@@ -134,14 +171,61 @@ def mousePressed():
         if mouseX > 650 and mouseX < 775 and mouseY > 10 and mouseY < 60: 
             activeTab = 4
         
-        
-
+        if activeTab == 4:
+            if mouseX >198 and mouseY > 140 and mouseX <598 and mouseY < 160:
+                selected_field = 1
+                return selected_field
             
-def draw():
+            if mouseX >198 and mouseY > 160 and mouseX <598 and mouseY < 180:
+                selected_field = 2
+                return selected_field
+            
+            if mouseX >198 and mouseY > 180 and mouseX <598 and mouseY < 200:
+                selected_field = 3
+                return selected_field
+            
+            if mouseX >198 and mouseY > 200 and mouseX <598 and mouseY < 220:
+                selected_field = 4
+                return selected_field
+        else:
+            selected_field = None
+            
+def keyPressed():
+    global spelerNamen
+    global selected_field
+    global activeTab
+    
+    if activeTab == 4 and selected_field != None:
+        # shift keyCode = 16 pressed; 
+        if key==65535 and keyCode == 16:
+            pass
+        # keyCode 17 = CTRL, 18 = ALT pressed
+        elif key == 65535:
+            if (keyCode == 17 or keyCode == 18):
+                pass
+        # keyCode 9 = TAB
+        elif keyCode==9:
+            if selected_field > 3:
+                selected_field = 1
+            else:
+                selected_field = selected_field +1
+        elif key==BACKSPACE:
+            if len(spelerNamen["speler"+str(selected_field)]) > 0:
+                spelerNamen["speler"+str(selected_field)] = spelerNamen["speler"+str(selected_field)][:len(spelerNamen["speler"+str(selected_field)])-1]
+        elif key==ENTER or key==RETURN:
+            # Enter new line, not used in this program.
+            # spelerNamen["speler"+str(selected_field)] = spelerNamen["speler"+str(selected_field)] + "\n"
+            pass
+        else:
+            spelerNamen["speler"+str(selected_field)] = spelerNamen["speler"+str(selected_field)] + str(key)
+            
+                                    
+def draw():    
     draw_bg(bg_img, screen_xSize, screen_ySize)
     menuButton()
     active(activeTab)
     menuText()
+    
     if activeTab == 0:
         Spelergegevens()
     elif activeTab == 1:
@@ -152,5 +236,6 @@ def draw():
         Kaartregels()
     elif activeTab == 4:
         Names()
+
 
     
