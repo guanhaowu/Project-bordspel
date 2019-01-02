@@ -217,7 +217,10 @@ def keyPressed():
             # spelerNamen["speler"+str(selected_field)] = spelerNamen["speler"+str(selected_field)] + "\n"
             pass
         else:
-            spelerNamen["speler"+str(selected_field)] = spelerNamen["speler"+str(selected_field)] + str(key)
+            if len(spelerNamen["speler"+str(selected_field)]) < 44:
+                spelerNamen["speler"+str(selected_field)] = spelerNamen["speler"+str(selected_field)] + str(key)
+            else:
+                spelerNamen["speler"+str(selected_field)] = spelerNamen["speler"+str(selected_field)]
             
                                     
 def draw():    
