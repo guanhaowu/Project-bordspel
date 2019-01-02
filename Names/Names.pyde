@@ -1,15 +1,17 @@
-name = {0:"", 1:"", 2:"", 3:""}
-Text = {"player1":"Fill your name","player2":"Fill your name","player3":"Fill your name","player4":"Fill your name"}
+Text = {"player1":"Fill your name", "player2":"Fill your name", "player3":"Fill your name", "player4":"Fill your name"}
+nameKey = Text.keys()
 selected_field = None
 def setup():
     global f
-    global name
-    global Text
     size(800,700)
     f = createFont("Arial",16, True)
-    for x in range(len(name)):
-        name[x]="Speler "+str(x) + ": \n"
-    
+
+def field_colors(field):
+    if field == 1: return fill(255,0,0)
+    if field == 2: return fill(0,255,0)
+    if field == 3: return fill(50,70,255)
+    if field == 4: return fill(255,255,0)   
+        
 def keyPressed():
     global Text
     global selected_field
@@ -53,20 +55,31 @@ def mousePressed():
                 Text["player4"] = ""
             else:
                 Text["player4"]
+
+
+         
             
 def draw():
     global selected_field
     global f
     global Text
-    global name
+    global nameKey
     background(255,255,255)
     
     stroke(175)
     
     textFont(f)
-    fill(0,0,0)
-    
     textAlign(LEFT)
-    for x in range(len(name)):
-        text(str(name[x]), 100, 60+(x*20))
+
+    for x in range(len(Text)):
+        field_colors(x+1)
+        rect(90, 45+(x*20), 108, 20)
+        rect(198, 45+(x*20), 200, 20)
+        noFill()
+
+    for x in range(len(nameKey)):
+        fill(0,0,0)
+        text(str(nameKey[x]), 100, 60+(x*20))
         text(str(Text["player"+str(x+1)]), 200, 60+(x*20))
+        noFill()
+        
