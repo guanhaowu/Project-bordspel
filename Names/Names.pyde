@@ -19,15 +19,10 @@ def keyPressed():
     global spelerNamen
     global selected_field
     
-    # shift keyCode = 16 pressed; 
-    if key==65535 and keyCode == 16:
-        pass
-    # keyCode 17 = CTRL, 18 = ALT pressed
-    elif key == 65535:
-        if (keyCode == 17 or keyCode == 18):
-            pass
+    # SHIFT keyCode = 16;
+    # keyCode 17 = CONTROL, 18 = ALT pressed
     # keyCode 9 = TAB
-    elif keyCode==9:
+    if key == TAB:
         if selected_field > 3:
             selected_field = 1
         else:
@@ -38,10 +33,10 @@ def keyPressed():
     elif key==ENTER or key==RETURN:
         # Enter new line, not used in this program.
         # spelerNamen["speler"+str(selected_field)] = spelerNamen["speler"+str(selected_field)] + "\n"
-        pass
-    else:
+        selected_field = None
+    elif (key >= 'A' and key <='Z') or (key >='a' and key <= 'z') or keyCode == 32 or key == SHIFT:
         if len(spelerNamen["speler"+str(selected_field)]) < 44:
-                spelerNamen["speler"+str(selected_field)] = spelerNamen["speler"+str(selected_field)] + str(key)
+            spelerNamen["speler"+str(selected_field)] = spelerNamen["speler"+str(selected_field)] + str(key)
     
 def mousePressed():
     global selected_field
