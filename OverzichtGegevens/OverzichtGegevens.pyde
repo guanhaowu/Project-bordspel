@@ -4,7 +4,7 @@ screen_ySize = 800
 buttonWidth = 12.5
 buttonHeight = 5
 tabs = [0, 1, 2, 3, 4]
-tabNames = ['Spelergegevens', 'Duel', 'Rad', 'Kaartregels', 'Name']
+tabNames = ['Spel overzicht', 'Dueleren', 'Rad', 'Kaartregels', 'Namen']
 spelerNamen = {"speler1":"", "speler2":"", "speler3":"", "speler4":""}
 activeTab = 0
 selected_field = None
@@ -65,6 +65,43 @@ def Rad1():
     fill(150)
     # code
     noFill()
+
+def Names():
+    global spelerNamen
+    
+    def field_colors(field):
+        if field == 1: return fill(255,0,0)
+        if field == 2: return fill(0,255,0)
+        if field == 3: return fill(50,70,255)
+        if field == 4: return fill(255,255,0)
+        
+    textAlign(CENTER)
+    stroke(0,0,0)
+    fill(0,0,0)
+    rect(90,120,508,20)
+    fill(255,255,255)
+    fonts("Arial Bold", 18, True)
+    text("Vul uw naam hier onder in:", 200, 120, 398,25)
+    noFill()
+    noStroke()
+    
+    fonts("Arial", 16, True)
+    for x in range(len(spelerNamen)):
+        stroke(0,0,0)
+        field_colors(x+1)
+        rect(90, 140+(x*20), 108, 20)  #column 1
+        fill(255,255,255)
+        rect(198, 140+(x*20), 400, 20) #column 2
+        noFill()
+        noStroke()
+
+    for x in range(len(spelerNamen)):
+        fill(0,0,0)
+        textAlign(LEFT)
+        text("speler" + str(x+1), 100, 155+(x*20))
+        text(str(spelerNamen["speler"+str(x+1)]), 200, 155+(x*20))
+        noFill()
+
 
 def mousePressed():
     global activeTab
@@ -145,5 +182,4 @@ def draw():
         # Kaartregels()
         pass
     elif activeTab == 4:
-        # Names()
-        pass
+        Names()
