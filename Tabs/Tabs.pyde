@@ -29,7 +29,7 @@ def fonts(font_type,font_size, state):
 
 
 
-def Spelergegevens():
+def OverzichtGegevens():
     fill(0)
     #code
     noFill()
@@ -149,7 +149,7 @@ def menuButton():
 def menuText():
     global tabNames
     for x in range(len(tabNames)):   
-        fill(252,252,252)
+        fill(0,0,0)
         fonts("Arial Bold Italic", 13, True)
         textAlign(CENTER)
         text(tabNames[x], 50+(x*150), 30, 125, 50)
@@ -223,7 +223,7 @@ def draw():
     menuText()
     
     if activeTab == 0:
-        Spelergegevens()
+        OverzichtGegevens()
     elif activeTab == 1:
         Duel()
     elif activeTab == 2:
