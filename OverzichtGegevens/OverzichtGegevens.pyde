@@ -50,11 +50,40 @@ def active(tab):
 def fonts(font_type,font_size, state):
     return textFont(createFont(font_type,font_size, state))
 
-def OverzichtGegevens():
-    fill(0)
-    #code
-    noFill()
+def field_colors(field):
+        if field == 1: return fill(255,0,0)
+        if field == 2: return fill(0,255,0)
+        if field == 3: return fill(50,70,255)
+        if field == 4: return fill(255,255,0)
 
+def OverzichtGegevens():
+    global spelerNamen
+    
+    textAlign(CENTER)
+    stroke(0,0,0)
+    fill(0,0,0)
+    rect(90,120,508,20)
+    fill(255,255,255)
+    fonts("Arial Bold", 18, True)
+    text("Gegevens overzicht van het spel:", 200, 120, 398,25)
+    noFill()
+    noStroke()
+    
+    fonts("Arial", 16, True)
+    for x in range(len(spelerNamen)):
+        stroke(0,0,0)
+        field_colors(x+1)
+        rect(90, 140+(x*20), 108, 20)  #column 1
+        fill(255,255,255)
+        rect(198, 140+(x*20), 400, 20) #column 2
+        noFill()
+        noStroke()
+    
+    for x in range(len(spelerNamen)):
+        fill(0,0,0)
+        textAlign(LEFT)
+        text(str(spelerNamen["speler"+str(x+1)]), 100, 155+(x*20))
+        noFill()
 
 def Duel():
     fill(0)
@@ -69,12 +98,6 @@ def Rad1():
 def Names():
     global spelerNamen
     
-    def field_colors(field):
-        if field == 1: return fill(255,0,0)
-        if field == 2: return fill(0,255,0)
-        if field == 3: return fill(50,70,255)
-        if field == 4: return fill(255,255,0)
-        
     textAlign(CENTER)
     stroke(0,0,0)
     fill(0,0,0)
