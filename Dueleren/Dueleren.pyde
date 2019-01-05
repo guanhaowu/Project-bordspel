@@ -4,7 +4,9 @@ tabs= [0,1]
 choices= ['3 dobbelstenen','4 dobbelstenen']
 dice = []
 diceRes= []
+diceResV=[]
 diceCount= 5
+diceCountV= 4
 activeTab = 'Dice'
 def setup():
     global dice
@@ -13,9 +15,9 @@ def setup():
     dice.append(loadImage( "wit.jpg"))
     fill(255)
     textSize(30)
-    text('Aanvaller',50,200,150,50)
+    text('Aanvaller',40,200,150,50)
     textAlign(CENTER)
-    text('Verdediger',50,500,150,50)
+    text('Verdediger',20,500,200,50)
     textAlign(CENTER)
     image(dice[0], 20, 300)
     image(dice[0],20,600)
@@ -77,8 +79,21 @@ def mousePressed():
     if mouseButton == LEFT:
         if((mouseX < 260) and (mouseX > 60) and (mouseY < 140) and (mouseY > 60)):
             roll_dice()
-            
+        if((mouseX < 260) and (mouseX > 60) and (mouseY < 140) and (mouseY > 60)):
+            roll_diceV()
+        if((mouseX < 399) and (mouseX > 100) and (mouseY < 250 ) and (mouseY > 100)):
+            global diceCount
+            diceCount = 4
+            roll_dice()
+            roll_diceV()
+        if((mouseX < 550) and (mouseX > 400) and (mouseY < 250 ) and (mouseY > 100)):
+            global diceCount
+            diceCount= 5
+            roll_dice()
+            roll_diceV()
 
+        
+        
                       
 def roll_dice():
     global diceCount
@@ -92,25 +107,55 @@ def roll_dice():
         x+=1
          # print(number)
     print(diceRes)
+    
+    
 
+def roll_diceV():
+    global diceCountV
+    global diceResV
+    global number
+    x=1
+    diceResV = []
+    while x < diceCountV:
+        number = randint(1,6)
+        diceResV.append(number)
+        x+=1
+         # print(number)
+    print(diceResV)
 
 def layout():
     global activeTab
     if activeTab == 'Dice':
         draw_textbox("Start het Duel", 0, 0, 0, 28, (CENTER, CENTER), 60, 60, 200, 40)
+    
             
 def draw():
     global diceRes
+    global diceResV
     global diceCount
+    global diceCountV
     global activeTab
     layout()
-    if activeTab == "Duel":
+    if activeTab == "Start het Duel":
         draw_buttons(60,60,200,40)
-    x = 0         
+    x=0
+    y=0     
     for a in diceRes:
         if a != 0:
             image(dice[a],20+(x*210),300)
-            x+=1 
-
+            x+=1
+    for a in diceResV:
+        if a != 0:
+            image(dice[a],20+(y*210),600)
+            y+=1
     menu()
     menutext()
+    
+
+
+
+
+    
+
+ 
+    
