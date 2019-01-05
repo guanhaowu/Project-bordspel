@@ -13,6 +13,35 @@ blinkTime = millis()
 blinkOn = True
 blinkLine = ""
 
+def setup():
+    global screen_xSize, screen_ySize
+    global kaart
+    global bg_img
+    size(screen_xSize, screen_ySize)
+    bg_img = loadImage("background_img.png")
+    noStroke()
+
+    for i in range (1,14):
+        kaart.append(loadImage(str(i)+".jpg"))    
+
+def menuButton():
+    global tabs
+    for tab in tabs:
+        fill(150)
+        stroke(150)
+        rect(50+tabs[tab]*150, 10, 125, 50, 10)
+        noStroke()
+        noFill()
+
+def menuText():
+    global tabNames
+    for x in range(len(tabNames)):   
+        fill(0,0,0)
+        fonts("Arial Bold Italic", 13, True)
+        textAlign(CENTER)
+        text(tabNames[x], 50+(x*150), 30, 125, 50)
+        noFill()
+
 def draw_bg(x, screen_xSize, screen_ySize):
     redraw()
     x.resize(screen_xSize, screen_ySize)
@@ -30,12 +59,43 @@ def active(tab):
 def fonts(font_type,font_size, state):
     return textFont(createFont(font_type,font_size, state))
 
-
+def field_colors(field):
+    if field == 1: return fill(255,0,0)
+    if field == 2: return fill(0,255,0)
+    if field == 3: return fill(50,70,255)
+    if field == 4: return fill(255,255,0)
 
 def OverzichtGegevens():
-    fill(0)
-    #code
+    global spelerNamen
+        
+    textAlign(CENTER)
+    stroke(0,0,0)
+    fill(0,0,0)
+    rect(90,120,508,20)
+    fill(255,255,255)
+    fonts("Arial Bold", 18, True)
+    text("Gegevens overzicht van het spel:", 200, 120, 398,25)
     noFill()
+    noStroke()
+    
+    fonts("Arial", 16, True)
+    for x in range(len(spelerNamen)):
+        stroke(0,0,0)
+        field_colors(x+1)
+        rect(90, 140+(x*20), 158, 20)  #column 1
+        fill(255,255,255)
+        rect(248, 140+(x*20), 350, 20) #column 2
+        noFill()
+        noStroke()
+    
+    for x in range(len(spelerNamen)):
+        fill(0,0,0)
+        textAlign(LEFT)
+        if len(spelerNamen["speler"+str(x+1)]) > 0:
+            text(str(spelerNamen["speler"+str(x+1)]), 100, 155+(x*20))
+        else:
+            text("speler"+str(x+1), 100, 155+(x*20))
+        noFill()
 
 
 def Duel():
@@ -97,12 +157,6 @@ def Names():
     global spelerNamen
     global blinkTime, blinkOn, blinkLine
     
-    def field_colors(field):
-        if field == 1: return fill(255,0,0)
-        if field == 2: return fill(0,255,0)
-        if field == 3: return fill(50,70,255)
-        if field == 4: return fill(255,255,0)
-    
     # Table name    
     textAlign(CENTER)
     stroke(0,0,0)
@@ -151,36 +205,6 @@ def Names():
     if (millis() - 250 > blinkTime):
         blinkTime = millis()
         blinkOn = not blinkOn
-
-def setup():
-    global screen_xSize, screen_ySize
-    global kaart
-    global bg_img
-    size(screen_xSize, screen_ySize)
-    bg_img = loadImage("background_img.png")
-    noStroke()
-
-    for i in range (1,14):
-        kaart.append(loadImage(str(i)+".jpg"))    
-
-def menuButton():
-    global tabs
-    for tab in tabs:
-        fill(150)
-        stroke(150)
-        rect(50+tabs[tab]*150, 10, 125, 50, 10)
-        noStroke()
-        noFill()
-
-def menuText():
-    global tabNames
-    for x in range(len(tabNames)):   
-        fill(0,0,0)
-        fonts("Arial Bold Italic", 13, True)
-        textAlign(CENTER)
-        text(tabNames[x], 50+(x*150), 30, 125, 50)
-        noFill()
-
 
 def mousePressed():
     global activeTab
