@@ -9,6 +9,9 @@ spelerNamen = {"speler1":"", "speler2":"", "speler3":"", "speler4":""}
 activeTab = 0
 kaart = []
 selected_field = None
+blinkTime = millis()
+blinkOn = True
+blinkLine = ""
 
 def draw_bg(x, screen_xSize, screen_ySize):
     redraw()
@@ -92,13 +95,15 @@ def Kaartregels():
 
 def Names():
     global spelerNamen
+    global blinkTime, blinkOn, blinkLine
     
     def field_colors(field):
         if field == 1: return fill(255,0,0)
         if field == 2: return fill(0,255,0)
         if field == 3: return fill(50,70,255)
         if field == 4: return fill(255,255,0)
-        
+    
+    # Table name    
     textAlign(CENTER)
     stroke(0,0,0)
     fill(0,0,0)
@@ -109,22 +114,43 @@ def Names():
     noFill()
     noStroke()
     
+    
     fonts("Arial", 16, True)
     for x in range(len(spelerNamen)):
         stroke(0,0,0)
         field_colors(x+1)
         rect(90, 140+(x*20), 108, 20)  #column 1
-        fill(255,255,255)
-        rect(198, 140+(x*20), 400, 20) #column 2
+        
+        fill(0,0,0)# Text color
+        textAlign(LEFT) # text alignment
+        text("speler" + str(x+1), 100, 155+(x*20)) #player1-4 column 1
+        
+        noFill()
+        
+        # highlight selected field upon click or Tab.
+        if (x+1) == selected_field:
+            fill(255,255,160)
+            rect(198, 140+(x*20), 400, 20) #column 2
+            fill(0,0,0)
+            text(str(spelerNamen["speler"+str(x+1)])+blinkLine, 200, 155+(x*20)) # display text in the input field box
+        else:
+            fill(255,255,255)
+            rect(198, 140+(x*20), 400, 20) #column 2
+            fill(0,0,0)
+            text(str(spelerNamen["speler"+str(x+1)]), 200, 155+(x*20))
         noFill()
         noStroke()
-
-    for x in range(len(spelerNamen)):
+        
+    if blinkOn:
         fill(0,0,0)
-        textAlign(LEFT)
-        text("speler" + str(x+1), 100, 155+(x*20))
-        text(str(spelerNamen["speler"+str(x+1)]), 200, 155+(x*20))
+        blinkLine = "|"
         noFill()
+    else:
+        blinkLine = ""
+        
+    if (millis() - 250 > blinkTime):
+        blinkTime = millis()
+        blinkOn = not blinkOn
 
 def setup():
     global screen_xSize, screen_ySize
@@ -200,7 +226,7 @@ def keyPressed():
         # keyCode 17 = CONTROL, 18 = ALT pressed
         # keyCode 9 = TAB
         if key == TAB:
-            if selected_field > 3:
+            if selected_field >= len(spelerNamen):
                 selected_field = 1
             else:
                 selected_field = selected_field +1
