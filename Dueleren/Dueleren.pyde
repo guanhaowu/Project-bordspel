@@ -1,5 +1,8 @@
 from random import randint
 number = 0
+numberV= 0
+newRes= 0
+newResV= 0
 tabs= [0,1]
 choices= ['3 dobbelstenen','4 dobbelstenen']
 dice = []
@@ -106,10 +109,9 @@ def roll_dice():
         diceRes.append(number)
         x+=1
          # print(number)
-    print(diceRes)
+    x= sum(diceRes)
+    print(x)
     
-    
-
 def roll_diceV():
     global diceCountV
     global diceResV
@@ -120,8 +122,12 @@ def roll_diceV():
         number = randint(1,6)
         diceResV.append(number)
         x+=1
-         # print(number)
-    print(diceResV)
+        #print(number)
+    y= sum(diceResV)
+    print(y)
+    
+    
+
 
 def layout():
     global activeTab
