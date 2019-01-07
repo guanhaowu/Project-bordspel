@@ -3,6 +3,8 @@ number = 0
 numberV= 0
 newRes= 0
 newResV= 0
+c=0
+d=0
 tabs= [0,1]
 choices= ['3 dobbelstenen','4 dobbelstenen']
 dice = []
@@ -82,19 +84,22 @@ def mousePressed():
     if mouseButton == LEFT:
         if((mouseX < 260) and (mouseX > 60) and (mouseY < 140) and (mouseY > 60)):
             roll_dice()
+            win()
         if((mouseX < 260) and (mouseX > 60) and (mouseY < 140) and (mouseY > 60)):
             roll_diceV()
+            win()
         if((mouseX < 399) and (mouseX > 100) and (mouseY < 250 ) and (mouseY > 100)):
             global diceCount
             diceCount = 4
             roll_dice()
             roll_diceV()
+            win()
         if((mouseX < 550) and (mouseX > 400) and (mouseY < 250 ) and (mouseY > 100)):
             global diceCount
             diceCount= 5
             roll_dice()
             roll_diceV()
-
+            win()
         
         
                       
@@ -102,6 +107,7 @@ def roll_dice():
     global diceCount
     global diceRes
     global number
+    global x
     x=1
     diceRes = []
     while x < diceCount:
@@ -109,13 +115,15 @@ def roll_dice():
         diceRes.append(number)
         x+=1
          # print(number)
-    x= sum(diceRes)
-    print(x)
+    
+    
+
     
 def roll_diceV():
     global diceCountV
     global diceResV
     global number
+    global y
     x=1
     diceResV = []
     while x < diceCountV:
@@ -123,11 +131,23 @@ def roll_diceV():
         diceResV.append(number)
         x+=1
         #print(number)
-    y= sum(diceResV)
-    print(y)
     
     
-
+def win():
+    global c
+    global d
+    global diceRes
+    global diceResV
+    c= sum(diceRes)
+    print(c)
+    d= sum(diceResV)
+    print(d)
+    if  c > d:
+        print('Aanvaller wint!')
+    if c < d:
+        print('Verdediger wint!')
+    if c == d:
+        print('Gelijkspel , gooi nog een keer!')
 
 def layout():
     global activeTab
