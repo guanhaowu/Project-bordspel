@@ -57,7 +57,7 @@ def menu():
         noFill()
         textSize(13)
         text('Reset',650,140,130,50)
-        textSize(11)
+        textSize(12)
         fill(255,0,0)
         rect(60,60,200,100,150)
         fill(255,255,255)
@@ -102,16 +102,18 @@ def mousePressed():
         if((mouseX < 435) and (mouseX > 100) and (mouseY < 120 ) and (mouseY > 40)):
             global diceCount
             diceCount = 4
-            print(diceCount)
+            print('Aantal dobbelstenen gebruikt aanvaller: 3')
             
         if((mouseX < 550) and (mouseX > 460) and (mouseY < 120 ) and (mouseY > 50)):
             global diceCount
             diceCount= 5
-            print(diceCount)
+            print('Aantal dobbelstenen gebruikt aanvaller: 4')
             
         if((mouseX < 500) and (mouseX > 385) and (mouseY < 160) and (mouseY > 120)):
+            reset()
             roll_dice()
             roll_diceV()
+            win()
         if((mouseX < 750) and (mouseX > 650) and (mouseY < 160) and (mouseY > 120)):
             reset()
         
@@ -157,12 +159,15 @@ def win():
     
     fill(255,0,0)
     textSize(15)
-    if  c > d:
-        text('Aanvaller wint!', 40,215,700,50) # display text in the input field box 
-    elif c < d:
-        text('Verdediger wint!', 40,530,700,50) # display text in the input field box
-    elif c == d:
-        text('Gelijkspel, gooi nog een keer!', 40,515,700,50) # display text in the input field box
+    print('Aantal ogen aanvaller:',c)
+    print('Aantal ogen verdediger:',d)
+    if c >= 3 and d >= 3:
+        if  c > d:
+            text('Aanvaller wint!', 40,215,700,50) # display text in the input field box
+        elif c < d:
+            text('Verdediger wint!', 40,515,700,50) # display text in the input field box
+        elif c == d:
+            text('Gelijkspel, gooi nog een keer!', 40,515,700,50) # display text in the input field box
     noFill()
 
 def layout():
@@ -189,8 +194,6 @@ def draw():
             y+=1
     menu()
     menutext()
-    if diceRes >= 3 and diceResV >= 3:
-        win()
 
 
 
