@@ -6,6 +6,7 @@ newResV= 0
 c=0
 d=0
 tabs= [0,1]
+tabstwee=[0,1]
 choices= ['3 dobbelstenen','4 dobbelstenen']
 dice = []
 diceRes= []
@@ -20,9 +21,14 @@ def setup():
     dice.append(loadImage( "wit.jpg"))
     fill(255)
     textSize(30)
+    rect(40,200,600,50)
+    fill(50,50,50)
     text('Aanvaller',40,200,150,50)
     textAlign(CENTER)
-    text('Verdediger',20,500,200,50)
+    fill(255,255,255)
+    rect(40,500,600,50)
+    fill(50,50,50)
+    text('Verdediger',40,500,200,50)
     textAlign(CENTER)
     image(dice[0], 20, 300)
     image(dice[0],20,600)
@@ -30,24 +36,35 @@ def setup():
        dice.append(loadImage(str(i)+".png"))
     # noLoop()
 
-def dobbelsDrie():
-    global activeTab
-    activeTab= 0
-    noLoop()
-    
-def dobbelsVier():
-    global activeTab
-    activeTab= 1
-    noLoop()
+
     
 
 def menu():
     global tabs
+    global tabstwee
     for tab in tabs:
         fill(150)
         stroke(150)
-        rect(300+tabs[tab]*150, 200,130,50 , 150)
-        noFill()    
+        rect(300+tabs[tab]*150, 60,130, 50, 150)
+        noFill()
+    for tab_ in tabstwee:
+        fill(150)
+        stroke(150)
+        rect(375+tabstwee[tab_]*275, 120,130,50 , 150)
+        fill(252,252,252)
+        textSize(12)
+        text('Rol de dobbelstenen',377,140,130,50)
+        noFill()
+        textSize(13)
+        text('Reset',650,140,130,50)
+        textSize(11)
+        fill(255,0,0)
+        rect(60,60,200,100,150)
+        fill(255,255,255)
+        text('Kies het aantal dobbelstenen rol daarna de dobbelstenen.',80,75,175,50)
+        
+        
+           
     
 def menutext():
     global choices
@@ -56,7 +73,7 @@ def menutext():
         Font = createFont ("Arial Bold Italic", 13)
         textFont(Font)
         textAlign(CENTER)
-        text(choices[x], 300+(x*150), 215, 130, 50)
+        text(choices[x], 300+(x*150), 75, 130, 50)
         noFill()
     
     
@@ -82,25 +99,21 @@ def draw_textbox(word, R, G, B, fsize, align, x, y, width, height):
 
 def mousePressed():
     if mouseButton == LEFT:
-        if((mouseX < 260) and (mouseX > 60) and (mouseY < 140) and (mouseY > 60)):
-            roll_dice()
-            win()
-        if((mouseX < 260) and (mouseX > 60) and (mouseY < 140) and (mouseY > 60)):
-            roll_diceV()
-            win()
-        if((mouseX < 399) and (mouseX > 100) and (mouseY < 250 ) and (mouseY > 100)):
+        if((mouseX < 435) and (mouseX > 100) and (mouseY < 120 ) and (mouseY > 40)):
             global diceCount
             diceCount = 4
-            roll_dice()
-            roll_diceV()
-            win()
-        if((mouseX < 550) and (mouseX > 400) and (mouseY < 250 ) and (mouseY > 100)):
+            print(diceCount)
+            
+        if((mouseX < 550) and (mouseX > 460) and (mouseY < 120 ) and (mouseY > 50)):
             global diceCount
             diceCount= 5
+            print(diceCount)
+            
+        if((mouseX < 500) and (mouseX > 385) and (mouseY < 160) and (mouseY > 120)):
             roll_dice()
             roll_diceV()
-            win()
-        
+        if((mouseX < 750) and (mouseX > 650) and (mouseY < 160) and (mouseY > 120)):
+            reset()
         
                       
 def roll_dice():
@@ -115,10 +128,7 @@ def roll_dice():
         diceRes.append(number)
         x+=1
          # print(number)
-    
-    
-
-    
+        
 def roll_diceV():
     global diceCountV
     global diceResV
@@ -131,28 +141,34 @@ def roll_diceV():
         diceResV.append(number)
         x+=1
         #print(number)
-    
-    
-def win():
-    global c
-    global d
+
+def reset():
     global diceRes
     global diceResV
-    c= sum(diceRes)
-    print(c)
-    d= sum(diceResV)
-    print(d)
+    diceRes= []
+    diceResV=[]
+    return setup()
+    
+def win():
+    global diceRes
+    global diceResV
+    c = sum(diceRes)
+    d = sum(diceResV)
+    
+    fill(255,0,0)
+    textSize(15)
     if  c > d:
-        print('Aanvaller wint!')
-    if c < d:
-        print('Verdediger wint!')
-    if c == d:
-        print('Gelijkspel , gooi nog een keer!')
+        text('Aanvaller wint!', 40,215,700,50) # display text in the input field box 
+    elif c < d:
+        text('Verdediger wint!', 40,530,700,50) # display text in the input field box
+    elif c == d:
+        text('Gelijkspel, gooi nog een keer!', 40,515,700,50) # display text in the input field box
+    noFill()
 
 def layout():
     global activeTab
     if activeTab == 'Dice':
-        draw_textbox("Start het Duel", 0, 0, 0, 28, (CENTER, CENTER), 60, 60, 200, 40)
+        draw_textbox("Rol de dobbelstenen", 0, 0, 0, 28, (600, CENTER), 60, 60, 200, 40)
     
             
 def draw():
@@ -161,9 +177,6 @@ def draw():
     global diceCount
     global diceCountV
     global activeTab
-    layout()
-    if activeTab == "Start het Duel":
-        draw_buttons(60,60,200,40)
     x=0
     y=0     
     for a in diceRes:
@@ -176,7 +189,8 @@ def draw():
             y+=1
     menu()
     menutext()
-    
+    if diceRes >= 3 and diceResV >= 3:
+        win()
 
 
 
