@@ -1,5 +1,5 @@
 #screensize:
-screen_xSize = 1200
+screen_xSize = 1400
 screen_ySize = 800
 buttonWidth = 12.5
 buttonHeight = 5
@@ -67,14 +67,20 @@ def field_colors(field):
 
 def OverzichtGegevens():
     global spelerNamen
-        
     textAlign(CENTER)
     stroke(0,0,0)
-    fill(0,0,0)
-    rect(90,120,508,20)
+    for x in range(0,3):
+        fill(0,0,0)
+        rect(90,120+(x*20),858,20)
     fill(255,255,255)
-    fonts("Arial Bold", 18, True)
-    text("Gegevens overzicht van het spel:", 200, 120, 398,25)
+    fonts("Arial Bold", 16, True)
+    text("Gegevens overzicht van het spel", 200, 120, 700,25)
+    fill(255,255,255)
+    text('Verslagen kleur', 250, 140, 398, 25)
+    textAlign(CENTER)
+    text('Gevangenis', 650, 160, 100, 180)
+    text('Boer', 750, 160, 100, 180)
+    text('Reeks', 850, 160, 100, 180)
     noFill()
     noStroke()
     
@@ -82,22 +88,44 @@ def OverzichtGegevens():
     for x in range(len(spelerNamen)):
         stroke(0,0,0)
         field_colors(x+1)
-        rect(90, 140+(x*20), 158, 20)  #column 1
+        rect(90, 180+(x*20), 158, 20)  #column 1
         fill(255,255,255)
-        rect(248, 140+(x*20), 350, 20) #column 2
+        rect(248, 180+(x*20), 700, 20) #column 2
         noFill()
         noStroke()
     
-    for x in range(len(spelerNamen)):
+    for x in range(len(spelerNamen)):#horizontale kolom1
         fill(0,0,0)
         textAlign(LEFT)
         if len(spelerNamen["speler"+str(x+1)]) > 0:
-            text(str(spelerNamen["speler"+str(x+1)]), 100, 155+(x*20))
+            text(str(spelerNamen["speler"+str(x+1)]), 100, 195+(x*20))
         else:
-            text("speler"+str(x+1), 100, 155+(x*20))
+            text("speler"+str(x+1), 100, 195+(x*20))
         noFill()
 
 
+    
+
+
+    
+    for x in range(5):#tabel
+        if x < 4:
+            stroke(0,0,0)
+            field_colors(x+1)
+            rect(248+(x*100), 160, 100, 20)
+            noFill()
+        stroke(0,0,0)
+        line(248+(x*100),180,248+(x*100),260)
+        noStroke()
+        
+    for x in range(3):#tabel2
+        stroke(255,255,255)
+        line(648+(x*100), 160, 648+(x*100), 180)
+        stroke(0,0,0)
+        line(648+(x*100), 180, 648+(x*100), 260)
+        noStroke()
+        
+        
 def Duel():
     fill(0)
     #code
@@ -229,6 +257,8 @@ def mousePressed():
         if mouseX > 650 and mouseX < 775 and mouseY > 10 and mouseY < 60: 
             activeTab = 4
         
+            
+        
         if activeTab == 4:
             if mouseX >198 and mouseY > 140 and mouseX <598 and mouseY < 160:
                 selected_field = 1
@@ -270,7 +300,7 @@ def keyPressed():
             # spelerNamen["speler"+str(selected_field)] = spelerNamen["speler"+str(selected_field)] + "\n"
             selected_field = None
         elif (key >= 'A' and key <='Z') or (key >='a' and key <= 'z') or keyCode == 32 or key == SHIFT:
-            if len(spelerNamen["speler"+str(selected_field)]) < 44:
+            if len(spelerNamen["speler"+str(selected_field)]) < 10:
                 spelerNamen["speler"+str(selected_field)] = spelerNamen["speler"+str(selected_field)] + str(key)
         
                                     
