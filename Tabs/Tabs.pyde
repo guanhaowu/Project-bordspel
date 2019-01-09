@@ -1,5 +1,5 @@
 #screensize:
-screen_xSize = 1400
+screen_xSize = 1200
 screen_ySize = 800
 buttonWidth = 12.5
 buttonHeight = 5
@@ -12,6 +12,30 @@ selected_field = None
 blinkTime = millis()
 blinkOn = True
 blinkLine = ""
+Rood_tegen_Groen = 0
+Rood_tegen_Blauw = 0
+Rood_tegen_Geel = 0
+Groen_tegen_Rood = 0
+Groen_tegen_Blauw = 0
+Groen_tegen_Geel = 0
+Blauw_tegen_Rood = 0
+Blauw_tegen_Groen = 0
+Blauw_tegen_Geel = 0
+Geel_tegen_Rood = 0
+Geel_tegen_Groen = 0
+Geel_tegen_Blauw = 0
+Rood_Gevangenis = 0
+Groen_Gevangenis = 0
+Blauw_Gevangenis = 0
+Geel_Gevangenis = 0
+Rood_Boer = 0
+Groen_Boer = 0
+Blauw_Boer = 0
+Geel_Boer = 0
+Rood_reeks = 0
+Groen_reeks = 0
+Blauw_reeks = 0
+Geel_reeks = 0
 
 def setup():
     global screen_xSize, screen_ySize
@@ -102,8 +126,10 @@ def OverzichtGegevens():
         else:
             text("speler"+str(x+1), 100, 195+(x*20))
         noFill()
-
-
+    for x in range(4):
+        fill(155,155,155)
+        rect(248+(x*100), 180+(x*20), 100, 20)
+        noFill()
     
 
 
@@ -256,8 +282,12 @@ def mousePressed():
             activeTab = 3
         if mouseX > 650 and mouseX < 775 and mouseY > 10 and mouseY < 60: 
             activeTab = 4
-        
+
+        if activeTab == 0:
             
+            
+            
+        
         
         if activeTab == 4:
             if mouseX >198 and mouseY > 140 and mouseX <598 and mouseY < 160:
