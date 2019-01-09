@@ -128,7 +128,9 @@ def OverzichtGegevens():
         noFill()
     for x in range(4):
         fill(155,155,155)
+        stroke(0)
         rect(248+(x*100), 180+(x*20), 100, 20)
+        noStroke()
         noFill()
     
 
@@ -280,6 +282,30 @@ def Names():
         blinkOn = not blinkOn
 
 def mousePressed():
+    global Rood_tegen_Groen 
+    global Rood_tegen_Blauw 
+    global Rood_tegen_Geel 
+    global Groen_tegen_Rood 
+    global Groen_tegen_Blauw 
+    global Groen_tegen_Geel 
+    global Blauw_tegen_Rood 
+    global Blauw_tegen_Groen 
+    global Blauw_tegen_Geel 
+    global Geel_tegen_Rood 
+    global Geel_tegen_Groen 
+    global Geel_tegen_Blauw 
+    global Rood_Gevangenis 
+    global Groen_Gevangenis 
+    global Blauw_Gevangenis 
+    global Geel_Gevangenis 
+    global Rood_Boer 
+    global Groen_Boer 
+    global Blauw_Boer 
+    global Geel_Boer 
+    global Rood_reeks 
+    global Groen_reeks 
+    global Blauw_reeks 
+    global Geel_reeks
     global activeTab
     global selected_field
     if mouseButton == LEFT:
@@ -294,7 +320,20 @@ def mousePressed():
         if mouseX > 650 and mouseX < 775 and mouseY > 10 and mouseY < 60: 
             activeTab = 4
 
-        # if activeTab == 0:
+<<<<<<< HEAD
+        if activeTab == 0:
+            if mouseX > and mouseX <  and mouseY > and mouseY < :
+                Rood_tegen_Groen += 1
+                text(str(Rood_tegen_Groen), 
+            
+            
+            
+            
+            
+        
+=======
+
+>>>>>>> f6a0b05c005b12411fa3c6f1b0d6b4d4a540e0e1
         
         if activeTab == 4:
             if mouseX >198 and mouseY > 140 and mouseX <598 and mouseY < 160:
