@@ -32,10 +32,10 @@ Rood_Boer = 0
 Groen_Boer = 0
 Blauw_Boer = 0
 Geel_Boer = 0
-Rood_reeks = 0
-Groen_reeks = 0
-Blauw_reeks = 0
-Geel_reeks = 0
+Rood_Reeks = 0
+Groen_Reeks = 0
+Blauw_Reeks = 0
+Geel_Reeks = 0
 
 def setup():
     global screen_xSize, screen_ySize
@@ -154,13 +154,91 @@ def OverzichtGegevens():
         noStroke()
     Plus = loadImage("Pluse.jpg")
     minus = loadImage("min.jpg")
+    #rij 1
     image(minus,250,201,18,18)
     image(Plus,330,201,18,18)
-    text(str(Groen_tegen_Rood))
+    fill(0)
+    text(str(Groen_tegen_Rood),295,201,313,219)
     image(minus,250,222,18,18)
     image(Plus,330,222,18,18)
+    text(str(Blauw_tegen_Rood),295,222,313,219)
     image(minus,250,242,18,18)
     image(Plus,330,242,18,18)
+    text(str(Geel_tegen_Rood),295,242,313,219)
+    #rij 2
+    image(minus,350,181,18,18)
+    image(Plus,430,181,18,18)
+    text(str(Rood_tegen_Groen),395,181,413,219)
+    image(minus,350,222,18,18)
+    image(Plus,430,222,18,18)
+    text(str(Blauw_tegen_Groen),395,222,413,219)
+    image(minus,350,242,18,18)
+    image(Plus,430,242,18,18)
+    text(str(Geel_tegen_Groen),395,242,413,219)
+    
+    #rij 3
+    image(minus,450,181,18,18)
+    image(Plus,530,181,18,18)
+    text(str(Rood_tegen_Blauw),495,181,413,219)
+    image(minus,450,202,18,18)
+    image(Plus,530,202,18,18)
+    text(str(Groen_tegen_Blauw),495,202,413,219)
+    image(minus,450,242,18,18)
+    image(Plus,530,242,18,18)
+    text(str(Geel_tegen_Blauw),495,242,413,219)
+    #rij 4
+    image(minus,550,181,18,18)
+    image(Plus,630,181,18,18)
+    text(str(Rood_tegen_Geel),595,181,413,219)
+    image(minus,550,202,18,18)
+    image(Plus,630,202,18,18)
+    text(str(Groen_tegen_Geel),595,202,413,219)
+    image(minus,550,222,18,18)
+    image(Plus,630,222,18,18)
+    text(str(Blauw_tegen_Geel),595,222,413,219)
+    # rij 5
+    image(minus,650,181,18,18)
+    image(Plus,730,181,18,18)
+    text(str(Rood_Gevangenis),695,181,413,219)
+    image(minus,650,202,18,18)
+    image(Plus,730,202,18,18)
+    text(str(Groen_Gevangenis),695,202,413,219)
+    image(minus,650,222,18,18)
+    image(Plus,730,222,18,18)
+    text(str(Blauw_Gevangenis),695,222,413,219)
+    image(minus,650,242,18,18)
+    image(Plus,730,242,18,18)
+    text(str(Geel_Gevangenis),695,242,413,219)
+    #rij 6
+    image(minus,750,181,18,18)
+    image(Plus,830,181,18,18)
+    text(str(Rood_Boer),795,181,413,219)
+    image(minus,750,202,18,18)
+    image(Plus,830,202,18,18)
+    text(str(Groen_Boer),795,202,413,219)
+    image(minus,750,222,18,18)
+    image(Plus,830,222,18,18)
+    text(str(Blauw_Boer),795,222,413,219)
+    image(minus,750,242,18,18)
+    image(Plus,830,242,18,18)
+    text(str(Geel_Boer),795,242,413,219)
+    #rij 7
+    image(minus,850,181,18,18)
+    image(Plus,930,181,18,18)
+    text(str(Rood_Reeks),895,181,413,219)
+    image(minus,850,202,18,18)
+    image(Plus,930,202,18,18)
+    text(str(Groen_Reeks),895,202,413,219)
+    image(minus,850,222,18,18)
+    image(Plus,930,222,18,18)
+    text(str(Blauw_Reeks),895,222,413,219)
+    image(minus,850,242,18,18)
+    image(Plus,930,242,18,18)
+    text(str(Geel_Reeks),895,242,413,219)
+    
+    
+    
+    
     
     
         
@@ -302,10 +380,10 @@ def mousePressed():
     global Groen_Boer 
     global Blauw_Boer 
     global Geel_Boer 
-    global Rood_reeks 
-    global Groen_reeks 
-    global Blauw_reeks 
-    global Geel_reeks
+    global Rood_Reeks 
+    global Groen_Reeks 
+    global Blauw_Reeks 
+    global Geel_Reeks
     global activeTab
     global selected_field
     if mouseButton == LEFT:
@@ -320,20 +398,8 @@ def mousePressed():
         if mouseX > 650 and mouseX < 775 and mouseY > 10 and mouseY < 60: 
             activeTab = 4
 
-<<<<<<< HEAD
-        if activeTab == 0:
-            if mouseX > and mouseX <  and mouseY > and mouseY < :
-                Rood_tegen_Groen += 1
-                text(str(Rood_tegen_Groen), 
-            
-            
-            
-            
-            
-        
-=======
 
->>>>>>> f6a0b05c005b12411fa3c6f1b0d6b4d4a540e0e1
+            
         
         if activeTab == 4:
             if mouseX >198 and mouseY > 140 and mouseX <598 and mouseY < 160:
