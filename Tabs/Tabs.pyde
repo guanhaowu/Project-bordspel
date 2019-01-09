@@ -154,6 +154,13 @@ def OverzichtGegevens():
     minus = loadImage("min.jpg")
     image(minus,250,201,18,18)
     image(Plus,330,201,18,18)
+    text(str(Groen_tegen_Rood))
+    image(minus,250,222,18,18)
+    image(Plus,330,222,18,18)
+    image(minus,250,242,18,18)
+    image(Plus,330,242,18,18)
+    
+    
         
         
 def Duel():
@@ -287,11 +294,7 @@ def mousePressed():
         if mouseX > 650 and mouseX < 775 and mouseY > 10 and mouseY < 60: 
             activeTab = 4
 
-        if activeTab == 0:
-            
-            
-            
-        
+        # if activeTab == 0:
         
         if activeTab == 4:
             if mouseX >198 and mouseY > 140 and mouseX <598 and mouseY < 160:
@@ -311,6 +314,12 @@ def mousePressed():
                 return selected_field
         else:
             selected_field = None
+        if mousePressed == True:
+            frameRate(12)
+            stroke(155)
+            fill (0)
+            ellipse(mouseX, mouseY,5,5)
+            print(str(mouseX)+":"+str(mouseY))
                             
 def keyPressed():
     global spelerNamen
