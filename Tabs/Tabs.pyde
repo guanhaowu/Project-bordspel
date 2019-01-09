@@ -150,6 +150,10 @@ def OverzichtGegevens():
         stroke(0,0,0)
         line(648+(x*100), 180, 648+(x*100), 260)
         noStroke()
+    Plus = loadImage("Pluse.jpg")
+    minus = loadImage("min.jpg")
+    image(minus,250,201,18,18)
+    image(Plus,330,201,18,18)
         
         
 def Duel():
