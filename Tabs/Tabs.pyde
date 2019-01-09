@@ -398,6 +398,158 @@ def mousePressed():
         if mouseX > 650 and mouseX < 775 and mouseY > 10 and mouseY < 60: 
             activeTab = 4
 
+        if activeTab == 0:
+            #rij 1
+            if mouseX > 250 and mouseX < 268  and mouseY > 201 and mouseY < 219:
+                Groen_tegen_Rood = Groen_tegen_Rood - 1
+                text(str(Groen_tegen_Rood), 295, 201, 313, 219)     
+            elif mouseX > 330 and mouseX < 348  and mouseY > 201 and mouseY < 219:
+                Groen_tegen_Rood = Groen_tegen_Rood + 1
+                text(str(Groen_tegen_Rood), 295, 201, 313, 219)
+            elif mouseX > 250 and mouseX < 268  and mouseY > 222 and mouseY < 240:
+                Blauw_tegen_Rood = Blauw_tegen_Rood - 1
+                text(str(Blauw_tegen_Rood), 295, 222, 313, 219)     
+            elif mouseX > 330 and mouseX < 348  and mouseY > 222 and mouseY < 240:
+                Blauw_tegen_Rood = Blauw_tegen_Rood + 1
+                text(str(Blauw_tegen_Rood), 295, 222, 313, 219)
+            elif mouseX > 250 and mouseX < 268  and mouseY > 242 and mouseY < 260:
+                Geel_tegen_Rood = Geel_tegen_Rood - 1
+                text(str(Geel_tegen_Rood),295,242,313,219)     
+            elif mouseX > 330 and mouseX < 348  and mouseY > 242 and mouseY < 260:
+                Geel_tegen_Rood = Geel_tegen_Rood + 1
+                text(str(Geel_tegen_Rood),295,242,313,219)
+                #rij 2
+            elif mouseX > 350 and mouseX < 368  and mouseY > 182 and mouseY < 200:
+                Rood_tegen_Groen = Rood_tegen_Groen - 1
+                text(str(Rood_tegen_Groen),395,182,413,219)     
+            elif mouseX > 430 and mouseX < 448  and mouseY > 182 and mouseY < 200:
+                Rood_tegen_Groen = Rood_tegen_Groen + 1
+                text(str(Rood_tegen_Groen),395,182,413,219)
+            elif mouseX > 350 and mouseX < 368  and mouseY > 222 and mouseY < 240:
+                Blauw_tegen_Groen = Blauw_tegen_Groen - 1
+                text(str(Blauw_tegen_Groen),395,222,413,219)     
+            elif mouseX > 430 and mouseX < 448  and mouseY > 222 and mouseY < 240:
+                Blauw_tegen_Groen = Blauw_tegen_Groen + 1
+                text(str(Blauw_tegen_Groen),395,222,413,219)
+            elif mouseX > 350 and mouseX < 368  and mouseY > 242 and mouseY < 260:
+                Geel_tegen_Groen = Geel_tegen_Groen - 1
+                text(str(Geel_tegen_Groen),395,242,413,219)     
+            elif mouseX > 430 and mouseX < 448  and mouseY > 242 and mouseY < 260:
+                Geel_tegen_Groen = Geel_tegen_Groen + 1
+                text(str(Geel_tegen_Groen),395,242,413,219)
+                #rij 3
+            elif mouseX > 450 and mouseX < 468  and mouseY > 181 and mouseY < 199:
+                Rood_tegen_Blauw = Rood_tegen_Blauw - 1
+                text(str(Rood_tegen_Blauw),495,181,413,219)     
+            elif mouseX > 530 and mouseX < 548  and mouseY > 181 and mouseY < 191:
+                Rood_tegen_Blauw = Rood_tegen_Blauw + 1
+                text(str(Rood_tegen_Blauw),495,181,413,219)
+            elif mouseX > 450 and mouseX < 468  and mouseY > 202 and mouseY < 220:
+                Groen_tegen_Blauw = Groen_tegen_Blauw - 1
+                text(str(Groen_tegen_Blauw),495,202,413,219)     
+            elif mouseX > 530 and mouseX < 548  and mouseY > 202 and mouseY < 220:
+                Groen_tegen_Blauw = Groen_tegen_Blauw + 1
+                text(str(Groen_tegen_Blauw),495,202,413,219)
+            elif mouseX > 450 and mouseX < 468  and mouseY > 242 and mouseY < 260:
+                Geel_tegen_Blauw = Geel_tegen_Blauw - 1
+                text(str(Geel_tegen_Blauw),495,242,413,219)     
+            elif mouseX > 530 and mouseX < 548  and mouseY > 242 and mouseY < 260:
+                Geel_tegen_Blauw = Geel_tegen_Blauw + 1
+                text(str(Geel_tegen_Blauw),495,242,413,219)
+                #rij 4
+            elif mouseX > 550 and mouseX < 568  and mouseY > 181 and mouseY < 199:
+                Rood_tegen_Geel = Rood_tegen_Geel - 1
+                text(str(Rood_tegen_Geel),595,181,413,219)     
+            elif mouseX > 630 and mouseX < 648  and mouseY > 181 and mouseY < 199:
+                Rood_tegen_Geel = Rood_tegen_Geel + 1
+                text(str(Rood_tegen_Geel),595,181,413,219)
+            elif mouseX > 550 and mouseX < 568  and mouseY > 202 and mouseY < 220:
+                Groen_tegen_Geel = Groen_tegen_Geel - 1
+                text(str(Groen_tegen_Geel),595,202,413,219)     
+            elif mouseX > 630 and mouseX < 648  and mouseY > 202 and mouseY < 220:
+                Groen_tegen_Geel = Groen_tegen_Geel + 1
+                text(str(Groen_tegen_Geel),595,202,413,219)
+            elif mouseX > 550 and mouseX < 568  and mouseY > 222 and mouseY < 240:
+                Blauw_tegen_Geel = Blauw_tegen_Geel - 1
+                text(str(Blauw_tegen_Geel),595,222,413,219)     
+            elif mouseX > 630 and mouseX < 648  and mouseY > 222 and mouseY < 240:
+                Blauw_tegen_Geel = Blauw_tegen_Geel + 1
+                text(str(Blauw_tegen_Geel),595,222,413,219)
+                #rij 5
+            elif mouseX > 650 and mouseX < 668  and mouseY > 181 and mouseY < 199:
+                Rood_Gevangenis = Rood_Gevangenis - 1
+                text(str(Rood_Gevangenis),695,181,413,219)     
+            elif mouseX > 730 and mouseX < 748  and mouseY > 181 and mouseY < 199:
+                Rood_Gevangenis = Rood_Gevangenis + 1
+                text(str(Rood_Gevangenis),695,181,413,219)
+            elif mouseX > 650 and mouseX < 668  and mouseY > 202 and mouseY < 220:
+                Groen_Gevangenis = Groen_Gevangenis - 1
+                text(str(Groen_Gevangenis),695,202,413,219)     
+            elif mouseX > 730 and mouseX < 748  and mouseY > 202 and mouseY < 220:
+                Groen_Gevangenis = Groen_Gevangenis + 1
+                text(str(Groen_Gevangenis),695,202,413,219)
+            elif mouseX > 650 and mouseX < 668  and mouseY > 222 and mouseY < 240:
+                Blauw_Gevangenis = Blauw_Gevangenis - 1
+                text(str(Blauw_Gevangenis),695,222,413,219)     
+            elif mouseX > 730 and mouseX < 748  and mouseY > 222 and mouseY < 240:
+                Blauw_Gevangenis = Blauw_Gevangenis + 1
+                text(str(Blauw_Gevangenis),695,222,413,219)
+            elif mouseX > 650 and mouseX < 668  and mouseY > 242 and mouseY < 260:
+                Geel_Gevangenis = Geel_Gevangenis - 1
+                text(str(Geel_Gevangenis),695,242,413,219)     
+            elif mouseX > 730 and mouseX < 748  and mouseY > 242 and mouseY < 260:
+                Geel_Gevangenis = Geel_Gevangenis + 1
+                text(str(Geel_Gevangenis),695,242,413,219)
+                #rij 6
+            elif mouseX > 750 and mouseX < 768  and mouseY > 181 and mouseY < 199:
+                Rood_Boer = Rood_Boer - 1
+                text(str(Rood_Boer),795,181,413,219)     
+            elif mouseX > 830 and mouseX < 848  and mouseY > 181 and mouseY < 199:
+                Rood_Boer = Rood_Boer + 1
+                text(str(Rood_Boer),795,181,413,219)
+            elif mouseX > 750 and mouseX < 768  and mouseY > 202 and mouseY < 220:
+                Groen_Boer = Groen_Boer - 1
+                text(str(Groen_Boer),795,202,413,219)     
+            elif mouseX > 830 and mouseX < 848  and mouseY > 202 and mouseY < 220:
+                Groen_Boer = Groen_Boer + 1
+                text(str(Groen_Boer),795,202,413,219)
+            elif mouseX > 750 and mouseX < 768  and mouseY > 222 and mouseY < 240:
+                Blauw_Boer = Blauw_Boer - 1
+                text(str(Blauw_Boer),795,222,413,219)     
+            elif mouseX > 830 and mouseX < 848  and mouseY > 222 and mouseY < 240:
+                Blauw_Boer = Blauw_Boer + 1
+                text(str(Blauw_Boer),795,222,413,219)
+            elif mouseX > 750 and mouseX < 768  and mouseY > 242 and mouseY < 260:
+                Geel_Boer = Geel_Boer - 1
+                text(str(Geel_Boer),795,242,413,219)     
+            elif mouseX > 830 and mouseX < 848  and mouseY > 242 and mouseY < 260:
+                Geel_Boer = Geel_Boer + 1
+                text(str(Geel_Boer),795,242,413,219)
+            #rij 7
+            elif mouseX > 850 and mouseX < 868  and mouseY > 181 and mouseY < 199:
+                Rood_Reeks = Rood_Reeks - 1
+                text(str(Rood_Reeks),895,181,413,219)     
+            elif mouseX > 930 and mouseX < 948  and mouseY > 181 and mouseY < 199:
+                Rood_Reeks = Rood_Reeks + 1
+                text(str(Rood_Reeks),895,181,413,219)
+            elif mouseX > 850 and mouseX < 868  and mouseY > 202 and mouseY < 220:
+                Groen_Reeks = Groen_Reeks - 1
+                text(str(Groen_Reeks),895,202,413,219)     
+            elif mouseX > 930 and mouseX < 948  and mouseY > 202 and mouseY < 220:
+                Groen_Reeks = Groen_Reeks + 1
+                text(str(Groen_Reeks),895,202,413,219)
+            elif mouseX > 850 and mouseX < 868  and mouseY > 222 and mouseY < 240:
+                Blauw_Reeks = Blauw_Reeks - 1
+                text(str(Blauw_Reeks),895,222,413,219)     
+            elif mouseX > 930 and mouseX < 948  and mouseY > 222 and mouseY < 240:
+                Blauw_Reeks = Blauw_Reeks + 1
+                text(str(Blauw_Reeks),895,222,413,219)
+            elif mouseX > 850 and mouseX < 868  and mouseY > 242 and mouseY < 260:
+                Geel_Reeks = Geel_Reeks - 1
+                text(str(Geel_Reeks),895,242,413,219)     
+            elif mouseX > 930 and mouseX < 948  and mouseY > 242 and mouseY < 260:
+                Geel_Reeks = Geel_Reeks + 1
+                text(str(Geel_Reeks),895,242,413,219)
 
             
         
