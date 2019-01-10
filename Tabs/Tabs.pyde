@@ -40,9 +40,11 @@ Geel_Reeks = 0
 def setup():
     global screen_xSize, screen_ySize
     global kaart
-    global bg_img
+    global bg_img, plus, minus
     size(screen_xSize, screen_ySize)
     bg_img = loadImage("background_img.png")
+    plus = loadImage("Pluse.jpg")
+    minus = loadImage("min.jpg")
     noStroke()
 
     for i in range (1,14):
@@ -90,7 +92,7 @@ def field_colors(field):
     if field == 4: return fill(255,255,0)
 
 def OverzichtGegevens():
-    global spelerNamen
+    global spelerNamen, Plus, Min
     textAlign(CENTER)
     stroke(0,0,0)
     for x in range(0,3):
@@ -107,6 +109,15 @@ def OverzichtGegevens():
     text('Reeks', 850, 160, 100, 180)
     noFill()
     noStroke()
+    
+    #Reset button
+    fill(200,200,200)
+    rect(screen_xSize/100*7, screen_ySize/100*35, 100, 35, 5)
+    fill(0,0,0)
+    textAlign(CENTER,CENTER)
+    text('RESET',screen_xSize/100*7, screen_ySize/100*35, 100,35)
+    noFill() 
+    
     
     fonts("Arial", 16, True)
     for x in range(len(spelerNamen)):
@@ -132,10 +143,7 @@ def OverzichtGegevens():
         rect(248+(x*100), 180+(x*20), 100, 20)
         noStroke()
         noFill()
-    
 
-
-    
     for x in range(5):#tabel
         if x < 4:
             stroke(0,0,0)
@@ -152,97 +160,111 @@ def OverzichtGegevens():
         stroke(0,0,0)
         line(648+(x*100), 180, 648+(x*100), 260)
         noStroke()
-    Plus = loadImage("Pluse.jpg")
-    minus = loadImage("min.jpg")
-    #rij 1
+    
+    fill(0,0,0)    
+    #kolom 1
     image(minus,250,201,18,18)
-    image(Plus,330,201,18,18)
-    fill(0)
-    text(str(Groen_tegen_Rood),295,201,313,219)
     image(minus,250,222,18,18)
-    image(Plus,330,222,18,18)
-    text(str(Blauw_tegen_Rood),295,222,313,219)
     image(minus,250,242,18,18)
-    image(Plus,330,242,18,18)
+    image(minus,250,242,18,18)
+    
+    image(plus,330,201,18,18)
+    image(plus,330,222,18,18)
+    image(plus,330,242,18,18)
+    
+    text(str(Groen_tegen_Rood),295,201,313,219)
+    text(str(Blauw_tegen_Rood),295,222,313,219)
     text(str(Geel_tegen_Rood),295,242,313,219)
-    #rij 2
+    
+    #kolom 2
     image(minus,350,181,18,18)
-    image(Plus,430,181,18,18)
-    text(str(Rood_tegen_Groen),395,181,413,219)
-    image(minus,350,222,18,18)
-    image(Plus,430,222,18,18)
-    text(str(Blauw_tegen_Groen),395,222,413,219)
+    image(minus,350,222,18,18)    
     image(minus,350,242,18,18)
-    image(Plus,430,242,18,18)
+    
+    image(plus,430,181,18,18)
+    image(plus,430,222,18,18)
+    image(plus,430,242,18,18)
+    
+    text(str(Rood_tegen_Groen),395,181,413,219)
+    text(str(Blauw_tegen_Groen),395,222,413,219)
     text(str(Geel_tegen_Groen),395,242,413,219)
     
-    #rij 3
+    #kolom 3
     image(minus,450,181,18,18)
-    image(Plus,530,181,18,18)
-    text(str(Rood_tegen_Blauw),495,181,413,219)
     image(minus,450,202,18,18)
-    image(Plus,530,202,18,18)
-    text(str(Groen_tegen_Blauw),495,202,413,219)
     image(minus,450,242,18,18)
-    image(Plus,530,242,18,18)
+    
+    image(plus,530,181,18,18)
+    image(plus,530,202,18,18)
+    image(plus,530,242,18,18)
+    
+    text(str(Rood_tegen_Blauw),495,181,413,219)
+    text(str(Groen_tegen_Blauw),495,202,413,219)
     text(str(Geel_tegen_Blauw),495,242,413,219)
-    #rij 4
+    
+    #kolom 4
     image(minus,550,181,18,18)
-    image(Plus,630,181,18,18)
-    text(str(Rood_tegen_Geel),595,181,413,219)
     image(minus,550,202,18,18)
-    image(Plus,630,202,18,18)
-    text(str(Groen_tegen_Geel),595,202,413,219)
     image(minus,550,222,18,18)
-    image(Plus,630,222,18,18)
+    
+    image(plus,630,181,18,18)
+    image(plus,630,202,18,18)
+    image(plus,630,222,18,18)
+    
+    text(str(Rood_tegen_Geel),595,181,413,219)
+    text(str(Groen_tegen_Geel),595,202,413,219)
     text(str(Blauw_tegen_Geel),595,222,413,219)
-    # rij 5
+    
+    #kolom 5
     image(minus,650,181,18,18)
-    image(Plus,730,181,18,18)
-    text(str(Rood_Gevangenis),695,181,413,219)
     image(minus,650,202,18,18)
-    image(Plus,730,202,18,18)
-    text(str(Groen_Gevangenis),695,202,413,219)
     image(minus,650,222,18,18)
-    image(Plus,730,222,18,18)
-    text(str(Blauw_Gevangenis),695,222,413,219)
     image(minus,650,242,18,18)
-    image(Plus,730,242,18,18)
+    
+    image(plus,730,181,18,18)
+    image(plus,730,202,18,18)
+    image(plus,730,222,18,18)
+    image(plus,730,242,18,18)
+    
+    text(str(Rood_Gevangenis),695,181,413,219)
+    text(str(Groen_Gevangenis),695,202,413,219)
+    text(str(Blauw_Gevangenis),695,222,413,219)
     text(str(Geel_Gevangenis),695,242,413,219)
-    #rij 6
+    
+    #kolom 6
     image(minus,750,181,18,18)
-    image(Plus,830,181,18,18)
-    text(str(Rood_Boer),795,181,413,219)
     image(minus,750,202,18,18)
-    image(Plus,830,202,18,18)
-    text(str(Groen_Boer),795,202,413,219)
     image(minus,750,222,18,18)
-    image(Plus,830,222,18,18)
-    text(str(Blauw_Boer),795,222,413,219)
     image(minus,750,242,18,18)
-    image(Plus,830,242,18,18)
+    
+    image(plus,830,181,18,18)
+    image(plus,830,202,18,18)
+    image(plus,830,222,18,18)
+    image(plus,830,242,18,18)
+    
+    text(str(Rood_Boer),795,181,413,219)
+    text(str(Groen_Boer),795,202,413,219)
+    text(str(Blauw_Boer),795,222,413,219)
     text(str(Geel_Boer),795,242,413,219)
-    #rij 7
+    
+    #kolom 7
     image(minus,850,181,18,18)
-    image(Plus,930,181,18,18)
-    text(str(Rood_Reeks),895,181,413,219)
     image(minus,850,202,18,18)
-    image(Plus,930,202,18,18)
-    text(str(Groen_Reeks),895,202,413,219)
     image(minus,850,222,18,18)
-    image(Plus,930,222,18,18)
-    text(str(Blauw_Reeks),895,222,413,219)
     image(minus,850,242,18,18)
-    image(Plus,930,242,18,18)
-    text(str(Geel_Reeks),895,242,413,219)
     
+    image(plus,930,181,18,18)
+    image(plus,930,202,18,18)
+    image(plus,930,222,18,18)
+    image(plus,930,242,18,18)
     
+    text(str(Rood_Reeks),895,181,413,219)
+    text(str(Groen_Reeks),895,202,413,219)
+    text(str(Blauw_Reeks),895,222,413,219)
+    text(str(Geel_Reeks),895,242,413,219)    
     
-    
-    
-    
-        
-        
+    noFill()
+                
 def Duel():
     fill(0)
     #code
