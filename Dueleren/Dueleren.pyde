@@ -15,10 +15,12 @@ diceCount= 5
 diceCountV= 4
 activeTab = 'Dice'
 def setup():
-    global dice
+    global dice, resetknop
     size(800,800)
     background(loadImage('background.png'))
     dice.append(loadImage( "wit.jpg"))
+    resetknop =  loadImage('resetknop.png')
+    resetknop.resize(50,50)
     fill(255)
     textSize(30)
     rect(40,200,600,50)
@@ -29,39 +31,33 @@ def setup():
     rect(40,500,600,50)
     fill(50,50,50)
     text('Verdediger',40,500,200,50)
-    textAlign(CENTER)
-    image(dice[0], 20, 300)
-    image(dice[0],20,600)
     for i in range(1,7):
-       dice.append(loadImage(str(i)+".png"))
-    # noLoop()
-
-
-    
+       dice.append(loadImage(str(i)+".png"))    
 
 def menu():
     global tabs
     global tabstwee
+    global resetknop
     for tab in tabs:
         fill(150)
         stroke(150)
         rect(300+tabs[tab]*150, 60,130, 50, 150)
         noFill()
-    for tab_ in tabstwee:
-        fill(150)
-        stroke(150)
+    for tab_ in tabstwee:        
+        fill(255,0,0)
+        stroke(255,0,0)
         rect(375+tabstwee[tab_]*275, 120,130,50 , 150)
-        fill(252,252,252)
-        textSize(12)
-        text('Rol de dobbelstenen',377,140,130,50)
+        noStroke()
+        fill(255,255,255)
+        textSize(23)
+        text('Roll',377,140,130,50)
         noFill()
-        textSize(13)
-        text('Reset',650,140,130,50)
+        image(resetknop,690,120)
         textSize(12)
         fill(255,0,0)
         rect(60,60,200,100,150)
         fill(255,255,255)
-        text('Kies het aantal dobbelstenen rol daarna de dobbelstenen.',80,75,175,50)
+        text('Kies het aantal dobbelstenen rol daarna de dobbelstenen.',60,80,200,50)
         
         
            
@@ -95,6 +91,7 @@ def draw_textbox(word, R, G, B, fsize, align, x, y, width, height):
     textSize(fsize)
     fill(R,G,B)   
     text(word,x,y, width, height)
+    ###
     
 
 def mousePressed():
@@ -154,8 +151,8 @@ def reset():
 def win():
     global diceRes
     global diceResV
-    c = sum(diceRes)
-    d = sum(diceResV)
+    global c,d
+
     
     fill(255,0,0)
     textSize(15)
@@ -168,6 +165,8 @@ def win():
             text('Verdediger wint!', 40,515,700,50) # display text in the input field box
         elif c == d:
             text('Gelijkspel, gooi nog een keer!', 40,515,700,50) # display text in the input field box
+            text('Gelijkspel, gooi nog een keer!', 40,215,700,50) # display text in the input field box
+
     noFill()
 
 def layout():
@@ -182,19 +181,28 @@ def draw():
     global diceCount
     global diceCountV
     global activeTab
+    global c,d
+    c = sum(diceRes)
+    d = sum(diceResV)
     x=0
-    y=0     
-    for a in diceRes:
-        if a != 0:
+    y=0 
+    
+    if c == 0:
+        image(dice[0], 20, 300)
+    else:   
+        for a in diceRes:
             image(dice[a],20+(x*210),300)
             x+=1
-    for a in diceResV:
-        if a != 0:
+    
+    if d == 0:
+            image(dice[0], 20,600)
+    else:        
+        for a in diceResV:
             image(dice[a],20+(y*210),600)
             y+=1
+    
     menu()
     menutext()
-
 
 
 
