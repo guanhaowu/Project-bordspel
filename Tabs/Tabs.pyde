@@ -1,6 +1,11 @@
+from random import randint
+
+
 #screensize:
 screen_xSize = 1200
 screen_ySize = 800
+
+#btn_size
 buttonWidth = 12.5
 buttonHeight = 5
 tabs = [0, 1, 2, 3, 4]
@@ -12,6 +17,11 @@ selected_field = None
 blinkTime = millis()
 blinkOn = True
 blinkLine = ""
+
+#Spinning Wheel
+rad = []
+
+# Initial Data for GegevensOverzicht
 Rood_tegen_Groen = 0
 Rood_tegen_Blauw = 0
 Rood_tegen_Geel = 0
