@@ -1,6 +1,6 @@
 from random import randint
 
-
+###Global Data
 #screensize:
 screen_xSize = 1200
 screen_ySize = 800
@@ -8,18 +8,28 @@ screen_ySize = 800
 #btn_size
 buttonWidth = 12.5
 buttonHeight = 5
+
+#Menu data
 tabs = [0, 1, 2, 3, 4]
 tabNames = ['Spel overzicht', 'Dueleren', 'Rad', 'Kaartregels', 'Namen']
-spelerNamen = {"speler1":"", "speler2":"", "speler3":"", "speler4":""}
 activeTab = 0
+
+# Loaded images of Kaart into kaart.
 kaart = []
+
+# Initial Data for Namen
+spelerNamen = {"speler1":"", "speler2":"", "speler3":"", "speler4":""}
 selected_field = None
+
+#Switch on/off
 blinkTime = millis()
 blinkOn = True
 blinkLine = ""
 
 #Spinning Wheel
 rad = []
+Rad_number = 0
+
 
 # Initial Data for GegevensOverzicht
 Rood_tegen_Groen = 0
@@ -49,16 +59,22 @@ Geel_Reeks = 0
 
 def setup():
     global screen_xSize, screen_ySize
-    global kaart
+    global kaart, rad
     global bg_img, plus, minus
     size(screen_xSize, screen_ySize)
     bg_img = loadImage("background_img.png")
     plus = loadImage("Pluse.jpg")
     minus = loadImage("min.jpg")
+    rad.append(loadImage("rad_default.jpg"))
     noStroke()
-
+    
+    # Kaart photo saved to kaart list
     for i in range (1,14):
         kaart.append(loadImage(str(i)+".jpg"))    
+
+    # Rad photo's save to rad list.
+    for i in range(1, 3):
+        rad.append(loadImage("rad"+str(i)+".jpg"))
 
 def menuButton():
     global tabs
@@ -316,12 +332,27 @@ def Duel():
     noFill()
 
 
-    
+def Spin_rad():
+    global Rad_number
+    Rad_number = randint(1,2)
 
-def Rad1():
-    fill(150)
-    # code
+def RadPage():
+    global Rad_number
+    
+    fill(255,255,255)
+    rect(400, 250, 200, 40)
+
+    fill(0,0,0)
+    fonts('Ariel',18, True)
+    textAlign(CENTER, CENTER)
+    text("Rol het Rad!", 400, 250, 200, 40) 
     noFill()
+    
+    if Rad_number == 0:
+        image(rad[0],300,300)
+    else:
+        image(rad[Rad_number],300,300)
+    
 
     
 def Kaartregels():
@@ -434,7 +465,7 @@ def mousePressed():
     global Rood_Gevangenis,Groen_Gevangenis,Blauw_Gevangenis,Geel_Gevangenis
     global Rood_Boer,Groen_Boer,Blauw_Boer,Geel_Boer 
     global Rood_Reeks, Groen_Reeks, Blauw_Reeks,Geel_Reeks
-    global activeTab
+    global activeTab, activeBtn
     global selected_field
     
     if mouseButton == LEFT:
@@ -579,8 +610,11 @@ def mousePressed():
                 Geel_Reeks = Geel_Reeks + 1
             elif mouseX > screen_xSize/100*7 and  mouseY > screen_ySize/100*35 and mouseX < screen_xSize/100*7 + 100 and mouseY < screen_ySize/100*35 +35 :
                 overzichtReset()
-
-
+        
+        # if activeTab == 2:
+        #     if (mouseX > 400) and (mouseX <600) and (mouseY >250) and (mouseY < 290):
+        #         Spin_rad()
+                
         if activeTab == 4:
             if mouseX >198 and mouseY > 140 and mouseX <598 and mouseY < 160:
                 selected_field = 1
@@ -645,11 +679,10 @@ def draw():
     elif activeTab == 1:
         Duel()
     elif activeTab == 2:
-        Rad1()
+        RadPage()
+        if mousePressed and mouseButton == LEFT and (mouseX > 400) and (mouseX <600) and (mouseY >250) and (mouseY < 290):
+            Spin_rad()
     elif activeTab == 3:
         Kaartregels()
     elif activeTab == 4:
         Names()
-
-
-    

@@ -12,8 +12,6 @@ def setup():
     for i in range(1, 3):
         rad.append(loadImage(str(i)+".jpg"))
     
-    
-    
 def draw_buttons(x,y,width,height):
     rect(x,y,width,height)
 
