@@ -1,7 +1,4 @@
 from random import randint
-c=0
-d=0
-
 tabs= [0,1]
 tabstwee=[0,1]
 

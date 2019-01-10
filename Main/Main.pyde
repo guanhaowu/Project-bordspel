@@ -99,6 +99,7 @@ def setup():
        dice.append(loadImage("dice_"+str(i)+".png")) 
 
 def menuButton():
+    global screen_xSize, screen_ySize
     global tabs
     for tab in tabs:
         fill(150)
@@ -106,7 +107,10 @@ def menuButton():
         rect(20+(tabs[tab]*200), 10, 180, 50, 10)
         noStroke()
         noFill()
-
+    noStroke()
+    fill(200)    
+    button(0, 70, screen_xSize, 30)
+    noFill()
 def menuText():
     global tabNames
     for x in range(len(tabNames)):   
@@ -122,14 +126,18 @@ def draw_bg(x, screen_xSize, screen_ySize):
     x = background(x)
     return x
 
-def active(tab):
-    global screen_xSize, screen_ySize, buttonWidth
-    fill(255,255,0)
-    stroke(150)
-    rect(20+(tab*200), 10, 180, 50, 10)
-    noStroke()
-    noFill()
+def active(type):
+    if type == 'menu':
+        return fill(255,255,0)
     
+    if type == 'diceChoiceBtn':
+        return fill(255,200,0)
+    
+def button(x1,y1,x2,y2,radius = 0):
+    stroke(150)
+    rect(x1,y1,x2,y2,radius)
+    noStroke()
+        
 def fonts(font_type,font_size, state):
     return textFont(createFont(font_type,font_size, state))
 
@@ -162,7 +170,7 @@ def OverzichtGegevens():
     
     #Reset button
     fill(200,200,200)
-    rect(screen_xSize/100*7, screen_ySize/100*35, 100, 35, 5)
+    button(screen_xSize/100*7, screen_ySize/100*35, 100, 35, 15)
     fill(0,0,0)
     textAlign(CENTER,CENTER)
     text('RESET',screen_xSize/100*7, screen_ySize/100*35, 100,35)
@@ -315,109 +323,165 @@ def OverzichtGegevens():
     
     noFill()
 
-def overzichtReset():
-    global Rood_tegen_Groen,Rood_tegen_Blauw, Rood_tegen_Geel
-    global Groen_tegen_Rood, Groen_tegen_Blauw,Groen_tegen_Geel
-    global Blauw_tegen_Rood,Blauw_tegen_Groen,Blauw_tegen_Geel
-    global Geel_tegen_Rood,Geel_tegen_Groen,Geel_tegen_Blauw
-    global Rood_Gevangenis,Groen_Gevangenis,Blauw_Gevangenis,Geel_Gevangenis
-    global Rood_Boer,Groen_Boer,Blauw_Boer,Geel_Boer 
-    global Rood_Reeks, Groen_Reeks, Blauw_Reeks,Geel_Reeks
-    Rood_tegen_Groen = 0
-    Rood_tegen_Blauw = 0
-    Rood_tegen_Geel = 0
-    Groen_tegen_Rood = 0
-    Groen_tegen_Blauw = 0
-    Groen_tegen_Geel = 0
-    Blauw_tegen_Rood = 0
-    Blauw_tegen_Groen = 0
-    Blauw_tegen_Geel = 0
-    Geel_tegen_Rood = 0
-    Geel_tegen_Groen = 0
-    Geel_tegen_Blauw = 0
-    Rood_Gevangenis = 0
-    Groen_Gevangenis = 0
-    Blauw_Gevangenis = 0
-    Geel_Gevangenis = 0
-    Rood_Boer = 0
-    Groen_Boer = 0
-    Blauw_Boer = 0
-    Geel_Boer = 0
-    Rood_Reeks = 0
-    Groen_Reeks = 0
-    Blauw_Reeks = 0
-    Geel_Reeks = 0
+def Reset(What2Reset):
+    if What2Reset == 'OverzichtGegevens':
+        global Rood_tegen_Groen,Rood_tegen_Blauw, Rood_tegen_Geel
+        global Groen_tegen_Rood, Groen_tegen_Blauw,Groen_tegen_Geel
+        global Blauw_tegen_Rood,Blauw_tegen_Groen,Blauw_tegen_Geel
+        global Geel_tegen_Rood,Geel_tegen_Groen,Geel_tegen_Blauw
+        global Rood_Gevangenis,Groen_Gevangenis,Blauw_Gevangenis,Geel_Gevangenis
+        global Rood_Boer,Groen_Boer,Blauw_Boer,Geel_Boer 
+        global Rood_Reeks, Groen_Reeks, Blauw_Reeks,Geel_Reeks
+        Rood_tegen_Groen = 0
+        Rood_tegen_Blauw = 0
+        Rood_tegen_Geel = 0
+        Groen_tegen_Rood = 0
+        Groen_tegen_Blauw = 0
+        Groen_tegen_Geel = 0
+        Blauw_tegen_Rood = 0
+        Blauw_tegen_Groen = 0
+        Blauw_tegen_Geel = 0
+        Geel_tegen_Rood = 0
+        Geel_tegen_Groen = 0
+        Geel_tegen_Blauw = 0
+        Rood_Gevangenis = 0
+        Groen_Gevangenis = 0
+        Blauw_Gevangenis = 0
+        Geel_Gevangenis = 0
+        Rood_Boer = 0
+        Groen_Boer = 0
+        Blauw_Boer = 0
+        Geel_Boer = 0
+        Rood_Reeks = 0
+        Groen_Reeks = 0
+        Blauw_Reeks = 0
+        Geel_Reeks = 0
+    
+    if What2Reset == 'Dices':
+        global diceRes
+        global diceResV
+        diceRes= []
+        diceResV=[]
                                                                                     
 def Duel():
-    global resetknop
+    global resetknop, diceCount, dice, diceRes, diceResV 
+    global sumA,sumB
     
-    fill(255,255,255) 
+    fill(255,255,240) 
     rect(0,250,screen_xSize/100 * 80,50)# White Bar 1 
     rect(0,550,screen_xSize/100 * 80,50)# White Bar 2 
     
     textSize(30)
     textAlign(LEFT,CENTER)
     fill(50,50,50)
-    text('Aanvaller',40,250,150,50)
+    text('Aanvaller',40,250,200,50)
     text('Verdediger',40,550,200,50)
     
     textAlign(CENTER,CENTER)
+    
     # Dice 3 and 4 buttons
+    fill(255,0,0)
+    button(300,110,200,50, radius =50)
+    button(550,110,200,50, radius =50)
+    active('diceChoiceBtn')
     for x in range(2):
-        stroke(2)
-        fill(150)
-        rect(300+(x*250), 100,200, 50, 150)
-        fill(0,0,0)
+        if diceCount == 4:
+            button(550,110,200,50, radius =50)
+            noFill()
+        elif diceCount == 3:
+            button(300,110,200,50, radius =50)
+            noFill()
         textSize(20)
-        text(choices[x],300+(x*250), 100, 200, 50)
+        fill(0,0,0)
+        text(choices[x],300+(x*250), 110, 200, 50)
         noFill()
-        noStroke()
+
         #Roll & Reset buttons
         for i in range (2):
             fill(255,0,0)
             stroke(255,0,0)
-            rect(300+(i*150), 165, 130, 50, 150)
+            rect(300+(i*500), 175, 130, 50, 150)
             noStroke()
             noFill()
     
     textAlign(CENTER)
     textSize(20)
     fill(255,0,0)
-    rect(10,100,250,90,25)
+    rect(10,110,250,90,25) #red bubble instructions
     fill(255,255,255)
-    text('Kies het aantal dobbelsten en rol daarna de dobbelstenen.',10,100,250,200)    
+    text('Kies het aantal dobbelsten en rol daarna de dobbelstenen.',10,110,250,200)    
     
     textSize(23)
     textAlign(CENTER,CENTER)
     fill(255,255,255)
-    text('Roll',300,165,130,50)
+    text('Rol',300,175,130,50)
     noFill()
-    image(resetknop,450+(130/2-25),165)
-    
+    image(resetknop,845,175)
+
     win()
+    
+    if sumA  == 0:
+        for x in range(diceCount):
+            image(dice[0], 20+(x*200), 320)
+    else:   
+        y1 = 0   
+        for a in diceRes:
+            image(dice[a], 20+(y1*200),320)
+            y1 += 1
+    
+    if sumB == 0:
+        for x in range(3):
+            image(dice[0], 20+(x*200),620)
+    else:
+        y2 = 0       
+        for a in diceResV:
+            image(dice[a],20+(y2*200),620)
+            y2 += 1
+    
+    
     
 def win():
     global diceRes, diceResV
     global sumA,sumB
     sumA = sum(diceRes)
     sumB = sum(diceResV)
+    
+    # show total points by default
     fill(255,0,0)
-    textSize(15)
+    textSize(30)
+    textAlign(CENTER,CENTER)
+    text('Totaal: '+str(sumA),((screen_xSize/100) * 75) - 150,250,200,50)
+    text('Totaal: '+str(sumB),((screen_xSize/100) * 75) - 150,550,200,50)
+    
+    textAlign(LEFT,CENTER)
     if sumA >= 3 and sumB >= 3:
         if  sumA > sumB:
-            text('Aanvaller wint!', 40,215,700,50) # display text in the input field box
-            text('Totaal: '+str(sumA),500,215,200,50)
+            text('wint!', 245,250,700,50) # display text in the White Bar 1
         elif sumA < sumB:
-            text('Verdediger wint!', 40,515,700,50) # display text in the input field box
-            text('Totaal: '+str(sumB),500,515,200,50)
+            text('wint!', 245,550,700,50) # display text in the White Bar 2
         elif sumA == sumB:
-            text('Gelijkspel, gooi nog een keer!', 40,515,700,50) # display text in the input field box
-            text('Gelijkspel, gooi nog een keer!', 40,215,700,50) # display text in the input field box
-            text('Totaal: '+str(sumA),500,215,200,50)
-            text('Totaal: '+str(sumB),500,515,200,50)
+            text('Gelijkspel, gooi nog een keer!', 245,250,700,50) # display text in the input field box
+            text('Gelijkspel, gooi nog een keer!', 245,550,700,50) # display text in the input field box
+
     noFill()
+    textSize(18)   
+
+def roll_dice():
+    global diceCount
+    global diceRes, diceResV
     
-   
+    x = 0
+    y = 0
+    while x < diceCount:
+        diceRes.append(randint(1,6))
+        x+=1
+    
+    while y < 3:
+        diceResV.append(randint(1,6))
+        y+=1
+    
+    
+         
 def Spin_rad():
     global Rad_number
     Rad_number = randint(1,2)
@@ -426,12 +490,12 @@ def RadPage():
     global Rad_number
     
     fill(255,255,255)
-    rect(400, 250, 200, 40)
+    button(400, 250, 200, 40, 50)
 
     fill(0,0,0)
     fonts('Ariel',18, True)
     textAlign(CENTER, CENTER)
-    text("Rol het Rad!", 400, 250, 200, 40) 
+    text("Rol het rad!", 400, 250, 200, 40) 
     noFill()
     
     if Rad_number == 0:
@@ -566,9 +630,10 @@ def mousePressed():
             activeTab = 3
         if mouseX > 820 and mouseX < 1000 and mouseY > 10 and mouseY < 60: 
             activeTab = 4
-
+        
+        #OverzichtGegevens page
         if activeTab == 0:
-            #rij 1
+            #kolom 1
             if mouseX > 250 and mouseX < 268  and mouseY > 201 and mouseY < 219:
                 if Groen_tegen_Rood > 0:
                     Groen_tegen_Rood = Groen_tegen_Rood - 1    
@@ -584,7 +649,7 @@ def mousePressed():
                     Geel_tegen_Rood = Geel_tegen_Rood - 1
             elif mouseX > 330 and mouseX < 348  and mouseY > 242 and mouseY < 260:
                 Geel_tegen_Rood = Geel_tegen_Rood + 1
-            #rij 2
+            #kolom 2
             elif mouseX > 350 and mouseX < 368  and mouseY > 182 and mouseY < 200:
                 if Rood_tegen_Groen > 0:
                     Rood_tegen_Groen = Rood_tegen_Groen - 1
@@ -600,7 +665,7 @@ def mousePressed():
                     Geel_tegen_Groen = Geel_tegen_Groen - 1
             elif mouseX > 430 and mouseX < 448  and mouseY > 242 and mouseY < 260:
                 Geel_tegen_Groen = Geel_tegen_Groen + 1
-            #rij 3
+            #kolom 3
             elif mouseX > 450 and mouseX < 468  and mouseY > 181 and mouseY < 199:
                 if Rood_tegen_Blauw > 0:
                     Rood_tegen_Blauw = Rood_tegen_Blauw - 1
@@ -616,7 +681,7 @@ def mousePressed():
                     Geel_tegen_Blauw = Geel_tegen_Blauw - 1
             elif mouseX > 530 and mouseX < 548  and mouseY > 242 and mouseY < 260:
                 Geel_tegen_Blauw = Geel_tegen_Blauw + 1
-            #rij 4
+            #kolom 4
             elif mouseX > 550 and mouseX < 568  and mouseY > 181 and mouseY < 199:
                 if Rood_tegen_Geel > 0:
                     Rood_tegen_Geel = Rood_tegen_Geel - 1
@@ -632,7 +697,7 @@ def mousePressed():
                     Blauw_tegen_Geel = Blauw_tegen_Geel - 1
             elif mouseX > 630 and mouseX < 648  and mouseY > 222 and mouseY < 240:
                 Blauw_tegen_Geel = Blauw_tegen_Geel + 1
-            #rij 5
+            #kolom 5
             elif mouseX > 650 and mouseX < 668  and mouseY > 181 and mouseY < 199:
                 if Rood_Gevangenis > 0:
                     Rood_Gevangenis = Rood_Gevangenis - 1
@@ -653,7 +718,7 @@ def mousePressed():
                     Geel_Gevangenis = Geel_Gevangenis - 1
             elif mouseX > 730 and mouseX < 748  and mouseY > 242 and mouseY < 260:
                 Geel_Gevangenis = Geel_Gevangenis + 1
-            #rij 6
+            #kolom 6
             elif mouseX > 750 and mouseX < 768  and mouseY > 181 and mouseY < 199:
                 if Rood_Boer > 0:
                     Rood_Boer = Rood_Boer - 1
@@ -674,7 +739,7 @@ def mousePressed():
                     Geel_Boer = Geel_Boer - 1
             elif mouseX > 830 and mouseX < 848  and mouseY > 242 and mouseY < 260:
                 Geel_Boer = Geel_Boer + 1
-            #rij 7
+            #kolom 7
             elif mouseX > 850 and mouseX < 868  and mouseY > 181 and mouseY < 199:
                 if Rood_Reeks > 0:
                     Rood_Reeks = Rood_Reeks - 1
@@ -696,7 +761,7 @@ def mousePressed():
             elif mouseX > 930 and mouseX < 948  and mouseY > 242 and mouseY < 260:
                 Geel_Reeks = Geel_Reeks + 1
             elif mouseX > screen_xSize/100*7 and  mouseY > screen_ySize/100*35 and mouseX < screen_xSize/100*7 + 100 and mouseY < screen_ySize/100*35 +35 :
-                overzichtReset()
+                Reset('OverzichtGegevens')
         
         # if activeTab == 2:
         #     if (mouseX > 400) and (mouseX <600) and (mouseY >250) and (mouseY < 290):
@@ -704,22 +769,21 @@ def mousePressed():
         
         #Dueleren Tab
         if activeTab == 1:
-            if mouseX > 300 and mouseX < 500 and mouseY > 100 and mouseY < 150:
-                diceCount = 4
-                print('Aantal dobbelstenen gebruikt aanvaller: 3')
+            if mouseX > 300 and mouseX < 500 and mouseY > 110 and mouseY < 160:
+                Reset('Dices')
+                diceCount = 3    
                 
-            if mouseX > 550 and mouseX < 750 and mouseY > 100 and mouseY < 150:
-                diceCount= 5
-                print('Aantal dobbelstenen gebruikt aanvaller: 4')
+            if mouseX > 550 and mouseX < 750 and mouseY > 110 and mouseY < 160:
+                Reset('Dices')
+                diceCount= 4
             
-            #300+(i*150), 165, 130, 50,
-            if mouseX > 300 and mouseX < 430 and mouseY > 165 and mouseY < 215:
-                reset()
+            if mouseX > 300 and mouseX < 430 and mouseY > 175 and mouseY < 225:
+                Reset('Dices')
                 roll_dice()
-                roll_diceV()
                 win()
-            if mouseX > 450 and mouseX < 580 and mouseY > 165 and mouseY < 215:
-                reset()
+            #reset button click area
+            if mouseX > 800 and mouseX < 930 and mouseY > 175 and mouseY < 225:
+                Reset('Dices')
         
         #Namen Tab        
         if activeTab == 4:
@@ -741,13 +805,13 @@ def mousePressed():
         else:
             selected_field = None
         
-        ## mouse position
-        if mousePressed == True:
-            frameRate(12)
-            stroke(155)
-            fill (0)
-            ellipse(mouseX, mouseY,5,5)
-            print(str(mouseX)+":"+str(mouseY))
+        ## mouse position debugger
+        # if mousePressed == True:
+        #     frameRate(12)
+        #     stroke(155)
+        #     fill (0)
+        #     ellipse(mouseX, mouseY,5,5)
+        #     print(str(mouseX)+":"+str(mouseY))
                             
 def keyPressed():
     global spelerNamen
@@ -778,9 +842,10 @@ def keyPressed():
 def draw():    
     draw_bg(bg_img, screen_xSize, screen_ySize)
     menuButton()
-    active(activeTab)
+    active('menu')
+    button(20+(activeTab*200), 10, 180, 50, radius = 10)
     menuText()
-    
+
     if activeTab == 0:
         OverzichtGegevens()
     elif activeTab == 1:
