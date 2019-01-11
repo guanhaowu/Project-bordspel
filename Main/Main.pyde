@@ -433,7 +433,7 @@ def Duel():
     
     textAlign(CENTER)
     textSize(20)
-    fill(255,0,0)
+    fill(255,0,0,170)
     rect(10,110,250,90,25) #red bubble instructions
     fill(255,255,255)
     text('Kies het aantal dobbelsten en rol daarna de dobbelstenen.',10,110,250,200)    
