@@ -9,6 +9,11 @@ screen_ySize = 800
 buttonWidth = 12.5
 buttonHeight = 5
 
+## instruction font size, height, box radius.
+textsize = 24
+firstLine = 400
+radius = 25
+
 #Menu data
 tabs = [0, 1, 2, 3, 4]
 tabNames = ['Spel overzicht', 'Dueleren', 'Rad', 'Kaartregels', 'Namen']
@@ -133,6 +138,9 @@ def active(type):
     if type == 'diceChoiceBtn':
         return fill(255,200,0)
     
+    if type == 'instruction':
+        return fill(100,0,100)
+    
 def button(x1,y1,x2,y2,radius = 0):
     stroke(150)
     rect(x1,y1,x2,y2,radius)
@@ -149,6 +157,7 @@ def field_colors(field):
 
 def OverzichtGegevens():
     global spelerNamen, plus, minus
+    global textsize, firstLine, radius
     textAlign(CENTER)
     stroke(0,0,0)
     for x in range(0,3):
@@ -170,10 +179,10 @@ def OverzichtGegevens():
     
     #Reset button
     fill(200,200,200)
-    button(screen_xSize/100*7, screen_ySize/100*35, 100, 35, 15)
+    button(screen_xSize/100*8, screen_ySize/100*35, 100, 35, 15)
     fill(0,0,0)
     textAlign(CENTER,CENTER)
-    text('RESET',screen_xSize/100*7, screen_ySize/100*35, 100,35)
+    text('RESET',screen_xSize/100*8, screen_ySize/100*35, 100,35)
     noFill() 
     
     
@@ -320,9 +329,27 @@ def OverzichtGegevens():
     text(str(Groen_Reeks),895,202,413,219)
     text(str(Blauw_Reeks),895,222,413,219)
     text(str(Geel_Reeks),895,242,413,219)    
-    
     noFill()
-
+    
+    ## Instruction box bg color
+    fill(200,200,200,150)
+    rect(screen_xSize/100*5, 390, screen_xSize/100*90, 328, radius)
+    noFill()
+    ## Instruction text
+    active('instruction')
+    fonts("Ariel", textsize, False)
+    textAlign(LEFT)
+    text('Instructies:', screen_xSize/100*5+10, firstLine, screen_xSize/100*90,textsize*1.5)
+    fonts("Ariel", textsize-4, False)
+    margin = textsize*2
+    text("Vul eerst uw naam in bij de tab \"Namen\".", screen_xSize/100*5+10, firstLine+(margin), screen_xSize/100*90,textsize*1.5)
+    text("Gebruik dit overzicht om alles bij te houden gedurende spelronde.", screen_xSize/100*5+10, firstLine+(margin*2), screen_xSize/100*80,textsize*1.5)
+    text("Wanneer een winnaar bekend is van het spel, druk op de \"RESET\" knop om alles terug te zetten naar 0.", screen_xSize/100*5+10, firstLine+(margin*3), screen_xSize/100*90,textsize*1.5)
+    text('Gebruik de tab \"Dueleren\" wanneer je iemand aanvalt.', screen_xSize/100*5+10, firstLine+(margin*4), screen_xSize/100*90,textsize*1.5)
+    text('Gebruik de tab \"Rad\" wanneer je op de kruisingpunt zit voor de korte weg.', screen_xSize/100*5+10, firstLine+(margin*5), screen_xSize/100*90,textsize*1.5)
+    text('Gebruik de tab \"Kaartregels\" als je de regels wilt weten van elke kaart.', screen_xSize/100*5+10, firstLine+(margin*6), screen_xSize/100*90,textsize*1.5)
+    noFill()
+    
 def Reset(What2Reset):
     if What2Reset == 'OverzichtGegevens':
         global Rood_tegen_Groen,Rood_tegen_Blauw, Rood_tegen_Geel
