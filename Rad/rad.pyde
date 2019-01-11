@@ -1,16 +1,28 @@
 from random import randint
 number = 0
 dice = []
+shortdice = []
 activeTab = 'Dice'
 def setup():
     global dice
+    global shortdice
     size(800,800)
     background(100,100,100)
+    
+    #dice afbeeldingen
     dice.append(loadImage("dice.jpg"))
     image(dice[0], 300, 300)
     for i in range(1,7):
         dice.append(loadImage(str(i)+".jpg"))
-    # noLoop()
+    
+    #shortdice afbeeldingen 
+    shortdice.append(loadImage("shortdice.jpg"))
+    image(, 300, 300)
+    for s in range(1,7):
+        dice.append(loadImage(str(i)+".jpg"))
+    
+    
+
     
     
     
@@ -40,7 +52,11 @@ def layout():
     global activeTab
     if activeTab == 'Dice':
         # draw_buttons(60,60,200,40)
-        draw_textbox("Roll the Dice", 0, 0, 0, 28, (CENTER, CENTER), 60, 60, 200, 40)
+        draw_textbox("Roll the Rad!", 0, 0, 0, 28, (CENTER, CENTER), 60, 60, 200, 40)
+        draw_textbox("Roll the Rad!", 0, 0, 0, 28, (CENTER, CENTER), 60, 100, 200, 40)
+
+
+
             
 def draw():
     global number
@@ -50,13 +66,19 @@ def draw():
     layout()
     if activeTab == "Dice":
         draw_buttons(60,60,200,40)
+        draw_buttons(60,100,200,40)
+
             
-    if((mouseX < 260) and (mouseX > 60) and (mouseY < 140) and (mouseY > 60) and mouseButton == LEFT):
+    if((mouseX < 260) and (mouseX > 60) and (mouseY < 100) and (mouseY > 60) and mouseButton == LEFT):
         roll_dice()
-         
+        
+    if((mouseX < 260) and (mouseX > 60) and (mouseY < 140) and (mouseY > 100) and mouseButton == LEFT):
+        fill(100)
+        rect(0, 100, 800, 800) 
+    
+            
     # if((mouseX < 260) and (mouseX > 60) and (mouseY < 90) and (mouseY > 10)):
              
     redraw()       
     if number != 0:
         image(dice[number],300,300)
-               

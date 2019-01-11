@@ -16,7 +16,7 @@ radius = 25
 
 #Menu data
 tabs = [0, 1, 2, 3, 4]
-tabNames = ['Spel overzicht', 'Dueleren', 'Rad', 'Kaartregels', 'Namen']
+tabNames = ['Spel overzicht', 'Duelleren', 'Rad', 'Kaartregels', 'Namen']
 activeTab = 0
 
 # Initial data of Dueleren
