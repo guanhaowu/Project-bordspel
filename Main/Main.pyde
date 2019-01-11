@@ -16,7 +16,7 @@ radius = 25
 
 #Menu data
 tabs = [0, 1, 2, 3, 4]
-tabNames = ['Spel overzicht', 'Duelleren', 'Rad', 'Kaartregels', 'Namen']
+tabNames = ['Spel overzicht', 'Duelleren', 'Shortcut', 'Kaartregels', 'Namen']
 activeTab = 0
 
 # Initial data of Dueleren
@@ -346,7 +346,7 @@ def OverzichtGegevens():
     text("Gebruik dit overzicht om alles bij te houden gedurende spelronde.", screen_xSize/100*5+10, firstLine+(margin*2), screen_xSize/100*80,textsize*1.5)
     text("Wanneer een winnaar bekend is van het spel, druk op de \"RESET\" knop om alles terug te zetten naar 0.", screen_xSize/100*5+10, firstLine+(margin*3), screen_xSize/100*90,textsize*1.5)
     text('Gebruik de tab \"Dueleren\" wanneer je iemand aanvalt.', screen_xSize/100*5+10, firstLine+(margin*4), screen_xSize/100*90,textsize*1.5)
-    text('Gebruik de tab \"Rad\" wanneer je op de kruisingpunt zit voor de korte weg.', screen_xSize/100*5+10, firstLine+(margin*5), screen_xSize/100*90,textsize*1.5)
+    text('Gebruik de tab \"Shortcut\" wanneer je op het kruisingspunt zit voor de shortcut.', screen_xSize/100*5+10, firstLine+(margin*5), screen_xSize/100*90,textsize*1.5)
     text('Gebruik de tab \"Kaartregels\" als je de regels wilt weten van elke kaart.', screen_xSize/100*5+10, firstLine+(margin*6), screen_xSize/100*90,textsize*1.5)
     noFill()
     
