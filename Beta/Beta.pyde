@@ -1,55 +1,19 @@
 import init_settings as s
 import sub_Lib as lib
-import sub_Overzicht as gegevens
+import sub_Overzicht as OG
 import sub_Names as name
 import sub_Duelleren as Duel
 import sub_Rad as Rad
 import sub_KaartRegels as Kaart
 
-inputFieldWidth = 308
-
-# Initial Data for GegevensOverzicht
-Rood_tegen_Groen = 0
-Rood_tegen_Blauw = 0
-Rood_tegen_Geel = 0
-Groen_tegen_Rood = 0
-Groen_tegen_Blauw = 0
-Groen_tegen_Geel = 0
-Blauw_tegen_Rood = 0
-Blauw_tegen_Groen = 0
-Blauw_tegen_Geel = 0
-Geel_tegen_Rood = 0
-Geel_tegen_Groen = 0
-Geel_tegen_Blauw = 0
-Rood_Gevangenis = 0
-Groen_Gevangenis = 0
-Blauw_Gevangenis = 0
-Geel_Gevangenis = 0
-Rood_Boer = 0
-Groen_Boer = 0
-Blauw_Boer = 0
-Geel_Boer = 0
-Rood_Reeks = 0
-Groen_Reeks = 0
-Blauw_Reeks = 0
-Geel_Reeks = 0
-
-#OverzichtGegevens: amount columns next to Names
-OverzichtColumn = 8
-OverzichtRows = 4
-
-#TEST
-# screen_xSize, screen_ySize  = s.getScreenSize()
-
-spelerNamen, selected_field = s.init('TabNamen')
-inputFieldNum = len(spelerNamen)
-
+ListNames = s.OverzichtData('name')
+inputFieldNum = len(ListNames)
 
 screen_xSize, screen_ySize = s.getScreenSize()
 def setup():
     global bgImg, plus, minus
     global radNum, activeTab, tabNames, textsize1, textsize2, textsize3
-    global resetBtnStartX, resetBtnEndX, resetReeksBtnStartX, resetReeksBtnEndX
+    global resetBtnStartX, resetBtnEndX, resetReeksBtnStartX, resetReeksBtnEndX, inputFieldWidth, inputFieldHeight
     
     tabNames = s.getMenuList()
 
@@ -61,84 +25,38 @@ def setup():
     activeTab = s.getTab()
     
     textsize1, textsize2, textsize3 = s.getTextSize(1), s.getTextSize(2), s.getTextSize(3)
+    
+    inputFieldWidth = s.getInputField('name','width')
+    inputFieldHeight = s.getInputField('name','height')
+    OGfieldH, OGfieldW = s.getInputField('overzicht','height'), s.getInputField('overzicht','width')
+    
+    OG.setup()
+    Duel.setup()
     Rad.setup()
     # Rad data
     radNum = 0
-    
     Kaart.setup()
-    Duel.setup()
+    name.setup()
     
-    plus = loadImage("Pluse.jpg")
-    minus = loadImage("min.jpg")
-
-    #Reset alles BTN setting
-    resetBtnStartX = screen_xSize/100*8
-    resetBtnEndX = 200 #button width
-    
-    #Reset Reeks BTN setting
-    resetReeksBtnStartX = screen_xSize/100*70
-    resetReeksBtnEndX = 150
 
 #Menu buttons Grey
 def menuButton():
+    stroke(150,150,150)
     for x in range(len(tabNames)):
         lib.button(screen_xSize/100*2+(x*200), 10, 180, textsize1*2, 10, 150, 150, 150) 
     
     #Menu Light-Grey Bar
-    lib.button(0, 70, screen_xSize, 30,0,200,200,200)
-
+    lib.button(0, 80, screen_xSize, 20,0,200,200,200)
+    noStroke()
+    
 def menuText():
-    lib.fonts("Arial Bold Italic", textsize1, True)
+    lib.fonts("Arial Bold Italic", textsize1, False)
     textAlign(CENTER,CENTER)
     for x in range(len(tabNames)):   
         fill(0,0,0)
         text(tabNames[x], screen_xSize/100*2+(x*(200)), 10, 180, textsize1*2)
         noFill()
-
-def active(type):
-    if type == 'diceChoiceBtn':
-        return fill(255,200,0)
     
-def Reset(What2Reset):
-    global Rood_tegen_Groen,Rood_tegen_Blauw, Rood_tegen_Geel
-    global Groen_tegen_Rood, Groen_tegen_Blauw,Groen_tegen_Geel
-    global Blauw_tegen_Rood,Blauw_tegen_Groen,Blauw_tegen_Geel
-    global Geel_tegen_Rood,Geel_tegen_Groen,Geel_tegen_Blauw
-    global Rood_Gevangenis,Groen_Gevangenis,Blauw_Gevangenis,Geel_Gevangenis
-    global Rood_Boer,Groen_Boer,Blauw_Boer,Geel_Boer
-    global Rood_Reeks, Groen_Reeks, Blauw_Reeks,Geel_Reeks
-    if What2Reset == 'OverzichtGegevens':
-        Rood_tegen_Groen = 0
-        Rood_tegen_Blauw = 0
-        Rood_tegen_Geel = 0
-        Groen_tegen_Rood = 0
-        Groen_tegen_Blauw = 0
-        Groen_tegen_Geel = 0
-        Blauw_tegen_Rood = 0
-        Blauw_tegen_Groen = 0
-        Blauw_tegen_Geel = 0
-        Geel_tegen_Rood = 0
-        Geel_tegen_Groen = 0
-        Geel_tegen_Blauw = 0
-        Rood_Gevangenis = 0
-        Groen_Gevangenis = 0
-        Blauw_Gevangenis = 0
-        Geel_Gevangenis = 0
-        Rood_Boer = 0
-        Groen_Boer = 0
-        Blauw_Boer = 0
-        Geel_Boer = 0
-        Rood_Reeks = 0
-        Groen_Reeks = 0
-        Blauw_Reeks = 0
-        Geel_Reeks = 0
-        Reset('ResetReeks')
-        
-    if What2Reset == 'ResetReeks':
-        Rood_Reeks = 0
-        Groen_Reeks = 0
-        Blauw_Reeks = 0
-        Geel_Reeks = 0
     
     
 def mousePressed():
@@ -306,8 +224,8 @@ def mousePressed():
             #     Reset('ResetReeks')
         
         #Shortcut Tab        
-        if activeTab == 2:
-            if mousePressed and mouseButton == LEFT and (mouseX > 400) and (mouseX <600) and (mouseY >250) and (mouseY < 290):
+        if activeTab == 2: #screen_xSize*0.125, screen_ySize*0.72, 200, textsize1*1.5, 10,255,255,255
+            if mousePressed and mouseButton == LEFT and (mouseX > (screen_xSize*0.125)) and (mouseX < (screen_xSize*0.125)+200) and (mouseY > screen_ySize*0.72) and (mouseY < (screen_ySize*0.72)+(textsize1*1.5)):
                 radNum = Rad.SpinRad()
                 return radNum
         
@@ -332,7 +250,7 @@ def mousePressed():
         #Namen Tab        
         if activeTab == 4:
             for x in range(inputFieldNum):
-                if mouseX >(screen_xSize/100*5)+100 and mouseX < (screen_xSize/100*5)+100+inputFieldWidth and mouseY >(120+(textsize1*1.5))+(x*(textsize2*1.5)) and mouseY < (120+(textsize1*1.5))+(x*(textsize2*1.5))+(textsize2*1.5):
+                if mouseX >(screen_xSize/100*5)+100 and mouseX < ((screen_xSize/100*5)+100+inputFieldWidth) and mouseY >(120+(textsize1*1.5))+(x*(textsize2*1.5)) and mouseY < (120+(textsize1*1.5))+(x*(textsize2*1.5))+(textsize2*1.5):
                     selected_field = x+1
                     return selected_field
                 else:
@@ -353,15 +271,15 @@ def keyPressed():
             else:
                 selected_field = selected_field +1
         elif key==BACKSPACE:
-            if len(spelerNamen["speler"+str(selected_field)]) > 0:
-                spelerNamen["speler"+str(selected_field)] = spelerNamen["speler"+str(selected_field)][:len(spelerNamen["speler"+str(selected_field)])-1]
+            if len(ListNames["speler"+str(selected_field)]) > 0:
+                ListNames["speler"+str(selected_field)] = ListNames["speler"+str(selected_field)][:len(ListNames["speler"+str(selected_field)])-1]
         elif key==ENTER or key==RETURN:
             # Enter new line, not used in this program.
             # spelerNamen["speler"+str(selected_field)] = spelerNamen["speler"+str(selected_field)] + "\n"
             selected_field = None
         elif (key >= 'A' and key <='Z') or (key >='a' and key <= 'z') or keyCode == 32 or key == SHIFT:
-            if len(spelerNamen["speler"+str(selected_field)]) < 10:
-                spelerNamen["speler"+str(selected_field)] = spelerNamen["speler"+str(selected_field)] + str(key)
+            if len(ListNames["speler"+str(selected_field)]) < 10:
+                ListNames["speler"+str(selected_field)] = ListNames["speler"+str(selected_field)] + str(key)
         
                                     
 def draw():
@@ -371,13 +289,18 @@ def draw():
     menuText()
 
     if activeTab == 0:
-        gegevens.OverzichtGegevens()
+        frameRate(10)
+        OG.OverzichtGegevens(ListNames)
     elif activeTab == 1:
+        frameRate(60)
         Duel.ShowDuelleren()
     elif activeTab == 2:
+        frameRate(60)
         Rad.ShowRad(radNum)
         mousePressed()
     elif activeTab == 3:
+        frameRate(4)
         Kaart.Kaartregels()
     elif activeTab == 4:
-        name.ShowNames(spelerNamen,selected_field)
+        frameRate(30)
+        name.ShowNames(ListNames,selected_field)

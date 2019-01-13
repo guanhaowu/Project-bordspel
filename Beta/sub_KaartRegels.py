@@ -5,12 +5,16 @@ import sub_Lib as lib
 def setup():
     global screen_xSize, screen_ySize, kaart
     screen_xSize, screen_ySize = s.getScreenSize()
+    card_xSize, card_ySize = s.getCardSize()
     
     # Loaded images of Kaart into kaart.
     kaart = []
     # Kaart photo saved to kaart list
     for i in range (1,14):
-        kaart.append(loadImage(str(i)+".jpg"))    
+        kaarten = loadImage(str(i)+".jpg")
+        #kaarten.resize(230,250)  
+        kaart.append(kaarten) 
+        
 
 def Kaartregels():
     card_width =  150 #150 px width card

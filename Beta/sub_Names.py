@@ -2,15 +2,18 @@ import init_settings as s
 import sub_Lib as lib
 
 screen_xSize, screen_ySize = s.getScreenSize()
-inputFieldWidth = s.init('inputFieldBtn')
+inputFieldWidth = s.getInputField('name','width')
+inputFieldHeight = s.getInputField('name','height')
 textsize1,textsize2 = s.getTextSize(1), s.getTextSize(2)
-spelerNamen, selected_field = s.init('TabNamen')
+spelerNamen, selected_field = s.OverzichtData('name'), s.OverzichtData('field')
 
-#Switch on/off
-blinkTime = millis()
-blinkOn = True
-blinkLine = ""
-            
+def setup():
+    global blinkTime, blinkOn, blinkLine
+    #Switch on/off
+    blinkTime = millis()
+    blinkOn = True
+    blinkLine = ""
+                                
 def ShowNames(spelerNamen, selected_field):
     global blinkTime, blinkOn, blinkLine
 
