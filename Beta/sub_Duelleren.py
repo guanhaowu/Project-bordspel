@@ -29,14 +29,14 @@ def setup():
        dice.append(loadImage("dice_"+str(i)+".png")) 
 
 def ShowDuelleren():   
-    lib.button(0,250,screen_xSize/100 * 80,50,0, 255,255,240)# White Bar 1 
-    lib.button(0,550,screen_xSize/100 * 80,50,0, 255,255,240)# White Bar 2 
+    lib.button(0, 250, (screen_xSize*0.8), 50, 0, 255,255,240)# White Bar 1 
+    lib.button(0, 550, (screen_xSize*0.8), 50, 0, 255,255,240)# White Bar 2 
     
     lib.fonts("Ariel" , textsize0, True)
     textAlign(LEFT,CENTER)
     fill(50,50,50)
-    text('Aanvaller',(((screen_xSize/100)*0)+20), 250, 200, 50)
-    text('Verdediger',(((screen_xSize/100)*0)+20), 550,200, 50)
+    text('Aanvaller',((screen_xSize*0.0)+20), 250, 200, 50)
+    text('Verdediger',((screen_xSize*0.0)+20), 550,200, 50)
     noFill()
     
     lib.fonts("Ariel" , textsize0, True)
@@ -135,7 +135,7 @@ def win():
         elif sumA < sumB:
             text('Wint!', ((screen_xSize*0)+20)+200,550,700,textsize0*1.5) # display text in the White Bar 2
         elif sumA == sumB:
-            text('Gelijkspel, gooi nog een keer!', (((screen_xSize/100)*0)+20)+200,250,500,textsize0*1.5) # display text in the input field box
+            text('Gelijkspel, gooi nog een keer!', (((screen_xSize*0.0)+20)+200),250,500,textsize0*1.5) # display text in the input field box
     noFill()
 
 def setDiceCounter(amount):

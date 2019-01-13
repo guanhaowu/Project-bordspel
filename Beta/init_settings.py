@@ -33,29 +33,30 @@ def getCardSize():
     return x,y
 
 ### OverzichtGegevens Tab content.
-#Amount of columns excluding Name column on OverzichtGegevens.
-def OvTable():
-    OverzichtColumn = 8
-    OverzichtRows = 4
-    return OverzichtColumn, OverzichtRows
-
 def OverzichtData(type):
-    if type == 'name':
+    if type == 'data':
         # Initial Data for Namen
-        spelerNamen = {"speler1":"", "speler2":"", "speler3":"", "speler4":""}
-        return spelerNamen
+        player = {
+                       'speler1':{'name':'', 'data':[0, 1, 2, 3, 4, 5]},
+                       'speler2':{'name':'', 'data':[0, 5, 0, 1, 2, 2]},
+                       'speler3':{'name':'', 'data':[0, 6, 0, 5, 4, 9]},
+                       'speler4':{'name':'', 'data':[0, 7, 0, 2, 8, 3]}
+                       }
+        return player
+    
+    if type == 'colName':
+        colName = ['Totaal', 'Gevangenis', 'Boer', 'Reeks']
+        return colName
     
     if type == 'field':
         selected_field = None
         return selected_field
     
-    if type =='data':
-        # Initial Data for GegevensOverzicht
-        player1 = { 'RoodvGroen': 0, 'RoodvBlauw' : 0, 'RoodvGeel' : 0, 'jail':0, 'jack':0, 'streak': 0 }
-        player2 = { 'GroenvRood': 0, 'GroenvBlauw': 0, 'GroenvGeel': 0, 'jail':0, 'jack':0, 'streak': 0 }
-        player3 = { 'BlauwvRood': 0, 'BlauwvGroen': 0, 'BlauwvGeel': 0, 'jail':0, 'jack':0, 'streak': 0 }
-        player4 = { 'GeelvRood' : 0, 'GeelvGroen' : 0, 'GeelvBlauw': 0, 'jail':0, 'jack':0, 'streak': 0 }
-        return player1, player2, player3, player4
+#Amount of columns excluding Name column on OverzichtGegevens.
+def OvTable():
+    OverzichtColumn = 8
+    OverzichtRows = len(OverzichtData('data'))
+    return OverzichtColumn, OverzichtRows
 
 ### Namen & OverzichtGegevens Tab content.
 def getInputField(tab, args):

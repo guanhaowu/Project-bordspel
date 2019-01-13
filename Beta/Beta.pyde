@@ -6,7 +6,7 @@ import sub_Duelleren as Duel
 import sub_Rad as Rad
 import sub_KaartRegels as Kaart
 
-ListNames = s.OverzichtData('name')
+ListNames = s.OverzichtData('data')
 inputFieldNum = len(ListNames)
 
 screen_xSize, screen_ySize = s.getScreenSize()
@@ -43,7 +43,7 @@ def setup():
 def menuButton():
     stroke(150,150,150)
     for x in range(len(tabNames)):
-        lib.button(screen_xSize/100*2+(x*200), 10, 180, textsize1*2, 10, 150, 150, 150) 
+        lib.button(((screen_xSize*0.02)+(x*200)), 10, 180, textsize1*2, 10, 150, 150, 150) 
     
     #Menu Light-Grey Bar
     lib.button(0, 80, screen_xSize, 20,0,200,200,200)
@@ -54,7 +54,7 @@ def menuText():
     textAlign(CENTER,CENTER)
     for x in range(len(tabNames)):   
         fill(0,0,0)
-        text(tabNames[x], screen_xSize/100*2+(x*(200)), 10, 180, textsize1*2)
+        text(tabNames[x], ((screen_xSize*0.02)+(x*(200))), 10, 180, textsize1*2)
         noFill()
     
     
@@ -250,7 +250,7 @@ def mousePressed():
         #Namen Tab        
         if activeTab == 4:
             for x in range(inputFieldNum):
-                if mouseX >(screen_xSize/100*5)+100 and mouseX < ((screen_xSize/100*5)+100+inputFieldWidth) and mouseY >(120+(textsize1*1.5))+(x*(textsize2*1.5)) and mouseY < (120+(textsize1*1.5))+(x*(textsize2*1.5))+(textsize2*1.5):
+                if mouseX >((screen_xSize*0.05)+100) and mouseX < (((screen_xSize*0.05)+100)+inputFieldWidth) and mouseY >(120+(textsize1*1.5))+(x*(textsize2*1.5)) and mouseY < (120+(textsize1*1.5))+(x*(textsize2*1.5))+(textsize2*1.5):
                     selected_field = x+1
                     return selected_field
                 else:
@@ -285,7 +285,7 @@ def keyPressed():
 def draw():
     s.getBgImg(bgImg, screen_xSize, screen_ySize)
     menuButton()
-    lib.button(screen_xSize/100*2+(activeTab*200), 10, 180, textsize1*2, 10, 255, 255, 0)
+    lib.button((screen_xSize*0.02+(activeTab*200)), 10, 180, textsize1*2, 10, 255, 255, 0)
     menuText()
 
     if activeTab == 0:

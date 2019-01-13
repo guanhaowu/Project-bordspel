@@ -21,7 +21,7 @@ def Kaartregels():
     card_height = 250 #250 px height card
     cardText_width =  133 #5 px margin from x start x position ,card 133px
     cardText_height = 195 #40 px margin from y position,card 195px
-    left_margin= screen_xSize/100*25 #margin from left 25%
+    left_margin= screen_xSize*0.25 #margin from left 25%
     card = 0
     for yRow in range(4):
         for xRow in range(5):

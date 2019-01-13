@@ -3,8 +3,7 @@ import sub_Lib as lib
 
 
 screen_xSize, screen_ySize = s.getScreenSize()
-spelerNamen = s.OverzichtData('name')
-player1, player2, player3, player4 = s.OverzichtData('data')
+spelerData = s.OverzichtData('data')
 textsize0, textsize1, textsize2, textsize3 = s.getTextSize(0), s.getTextSize(1), s.getTextSize(2), s.getTextSize(3)
 col, row = s.OvTable()
 OGfieldH, OGfieldW = s.getInputField('overzicht','height'), s.getInputField('overzicht','width')
@@ -13,12 +12,15 @@ OGfieldH, OGfieldW = s.getInputField('overzicht','height'), s.getInputField('ove
 def setup():
     global plus, minus
     global resetBtnStartX, resetBtnEndX, resetBtnStartY, resetBtnEndY, resetReeksBtnStartX, resetReeksBtnEndX
+    global colName
     
     try:
         plus = loadImage("plus.jpg")
         minus = loadImage("min.jpg")
     except ImgLoadError:
         print('Unable to load image. Check sub_Overzicht.py .Function: setup().')
+
+    colName = s.OverzichtData('colName')
 
     #Reset alles BTN setting
     resetBtnStartX = screen_xSize*0.08
@@ -30,93 +32,13 @@ def setup():
     resetReeksBtnStartX = screen_xSize*0.7
     resetReeksBtnEndX = 150 #button width
 
-def OverzichtGegevens(spelerNamen):
-    #Table layout of columns and rows 
-    stroke(0,0,0)
-    strokeWeight(1)
-    for y in range(row+2):
-        for x in range(col):
-            if y > 1:
-                lib.button(((screen_xSize/100*5)+200)+(x*OGfieldW), (120)+(y*textsize1*1.5), OGfieldW,textsize1*1.5,0,255,255,255)
-                line(((screen_xSize/100*5)+200)+(x*OGfieldW),(120)+(y*textsize1*1.5), ((screen_xSize/100*5)+200)+(x*OGfieldW),(120+(textsize1*1.5))+(y*textsize1*1.5))
-            else:
-                lib.button(((screen_xSize/100*5)+200)+(x*OGfieldW), (120)+(y*textsize1*1.5), OGfieldW,textsize1*1.5,0,0,0,0)
+def OverzichtGegevens(spelerData):
+    drawTable()
+    drawTableText()
+    drawTableData(spelerData, row)
     
-    '''Color column RGBY horizontal.'''
-    for x in range(len(spelerNamen)):
-        lib.field_colors(x+1)
-        rect(((screen_xSize/100*5)+200)+(x*OGfieldW), 120+(textsize1*2), OGfieldW,textsize1)
-    noFill()
-    noStroke()
-    
-    '''Color column RGBY vertical.'''
-    #Names column background
-    fill(0,0,0)
-    rect(screen_xSize/100*5, 120, 200,textsize1*1.5)
-    noFill()
-    for x in range(len(spelerNamen)+2):
-        if x > 1:
-            lib.field_colors(x-1)
-            rect(screen_xSize*0.05, (120)+(x*(textsize1*1.5)), 200, textsize1*1.5)  #column 1
-            noFill()
-        else:
-            noStroke()
-            lib.button((screen_xSize*0.05), (120)+(x*(textsize1*1.5)),200,(textsize1*1.5), 0,0,0,0)
-    
-    lib.fonts("Arial", textsize1, True)
-    
-    #Table name text
-    textAlign(CENTER,CENTER)
-    lib.fonts("Arial Bold", textsize0, True)
-    fill(255,255,255)
-    text("Gegevens overzicht van het spel", (screen_xSize*0.05), 120, (col+2)*OGfieldW ,textsize0*1.5)
-    noFill()
-    
-    
-
+    # fill(0,0,0)
             
-    # #Greybox
-    # for x in range(4):
-    #     fill(155,155,155)
-    #     stroke(0)
-    #     rect(248+(x*100), 180+(x*20), 100, 20)
-    #     noStroke()
-    #     noFill()
-    
-
-    #Top row names
-    # lib.fonts("Arial Bold", textsize2, True)
-    # fill(255,255,255)
-    # textAlign(CENTER)
-    # text('Verslagen kleur', screen_xSize/100*5, 120+(textsize1*1.5), 200*5, textsize2*1.5)
-    
-    # fill(255,0,0)
-    # text('Gevangenis', 650, 160, 100, 180)
-    # text('Boer', 750, 160, 100, 180)
-    # text('Reeks', 850, 160, 100, 180)
-    # noFill()
-    # noStroke()
-    
-    lib.fonts("Ariel", textsize1, True)
-    # #Names text in column 1   
-    for x in range(len(spelerNamen)):
-        fill(0,0,0)
-        textAlign(LEFT,CENTER)
-        if len(spelerNamen["speler"+str(x+1)]) > 0:
-            text(str(spelerNamen["speler"+str(x+1)]), (screen_xSize/100*5)+5, (120+(textsize1*1.5))+((x+1)*(textsize1*1.5)),200,(textsize1*1.5))
-        else:
-            text("Speler"+str(x+1), (screen_xSize/100*5)+5, (120+(textsize1*1.5))+((x+1)*(textsize1*1.5)), 200, (textsize1*1.5))
-        noFill()
-        
-    # for x in range(3):#tabel2
-    #     stroke(255,255,255)
-    #     line(648+(x*100), 160, 648+(x*100), 180)
-    #     stroke(0,0,0)
-    #     line(648+(x*100), 180, 648+(x*100), 260)
-    #     noStroke()
-    
-    
-    # fill(0,0,0)    
     #kolom 1
     # image(minus,250,201,18,18)
     # image(minus,250,222,18,18)
@@ -127,10 +49,6 @@ def OverzichtGegevens(spelerNamen):
     # image(plus,330,222,18,18)
     # image(plus,330,242,18,18)
     
-    # text(str(player2['GroenvRood']),295,201,313,219)
-    # text(str(player3['BlauwvRood']),295,222,313,219)
-    # text(str(player4['GeelvRood']) ,295,242,313,219)
-    
     # #kolom 2
     # image(minus,350,181,18,18)
     # image(minus,350,222,18,18)    
@@ -139,10 +57,7 @@ def OverzichtGegevens(spelerNamen):
     # image(plus,430,181,18,18)
     # image(plus,430,222,18,18)
     # image(plus,430,242,18,18)
-    
-    # text(str(Rood_tegen_Groen),395,181,413,219)
-    # text(str(Blauw_tegen_Groen),395,222,413,219)
-    # text(str(Geel_tegen_Groen),395,242,413,219)
+
     
     # #kolom 3
     # image(minus,450,181,18,18)
@@ -153,10 +68,6 @@ def OverzichtGegevens(spelerNamen):
     # image(plus,530,202,18,18)
     # image(plus,530,242,18,18)
     
-    # text(str(Rood_tegen_Blauw),495,181,413,219)
-    # text(str(Groen_tegen_Blauw),495,202,413,219)
-    # text(str(Geel_tegen_Blauw),495,242,413,219)
-    
     # #kolom 4
     # image(minus,550,181,18,18)
     # image(minus,550,202,18,18)
@@ -165,10 +76,6 @@ def OverzichtGegevens(spelerNamen):
     # image(plus,630,181,18,18)
     # image(plus,630,202,18,18)
     # image(plus,630,222,18,18)
-    
-    # text(str(Rood_tegen_Geel),595,181,413,219)
-    # text(str(Groen_tegen_Geel),595,202,413,219)
-    # text(str(Blauw_tegen_Geel),595,222,413,219)
     
     # #kolom 5
     # image(minus,650,181,18,18)
@@ -181,11 +88,6 @@ def OverzichtGegevens(spelerNamen):
     # image(plus,730,222,18,18)
     # image(plus,730,242,18,18)
     
-    # text(str(Rood_Gevangenis),695,181,413,219)
-    # text(str(Groen_Gevangenis),695,202,413,219)
-    # text(str(Blauw_Gevangenis),695,222,413,219)
-    # text(str(Geel_Gevangenis),695,242,413,219)
-    
     # #kolom 6
     # image(minus,750,181,18,18)
     # image(minus,750,202,18,18)
@@ -197,11 +99,6 @@ def OverzichtGegevens(spelerNamen):
     # image(plus,830,222,18,18)
     # image(plus,830,242,18,18)
     
-    # text(str(Rood_Boer),795,181,413,219)
-    # text(str(Groen_Boer),795,202,413,219)
-    # text(str(Blauw_Boer),795,222,413,219)
-    # text(str(Geel_Boer),795,242,413,219)
-    
     # #kolom 7
     # image(minus,850,181,18,18)
     # image(minus,850,202,18,18)
@@ -212,11 +109,7 @@ def OverzichtGegevens(spelerNamen):
     # image(plus,930,202,18,18)
     # image(plus,930,222,18,18)
     # image(plus,930,242,18,18)
-    
-    # text(str(Rood_Reeks),895,181,413,219)
-    # text(str(Groen_Reeks),895,202,413,219)
-    # text(str(Blauw_Reeks),895,222,413,219)
-    # text(str(Geel_Reeks),895,242,413,219)    
+       
     # noFill()
     
     # #Reset alles button
@@ -237,24 +130,137 @@ def OverzichtGegevens(spelerNamen):
     firstLine = 400
     endLine = 400
     radius = 25
+
+def drawTableInstructions():    
+    ## Instruction box bg color
+    lib.button(screen_xSize*0.05, 390, screen_xSize*0.9, endLine, radius, 200,200,200,150)
+    ## Instruction text
+    fill(100,0,100)
+    textAlign(LEFT)
+    lib.fonts("Ariel", textsize2, False)
+    text('Instructies:', screen_xSize*0.05+10, firstLine, screen_xSize*0.9,textsize2*2)
+    lib.fonts("Ariel", textsize3, False)
+    margin = textsize3*1.5
+    text("Vul eerst uw naam in bij de tab \"Namen\".", ((screen_xSize*0.05)+10), firstLine+(textsize2*2), (screen_xSize*0.9),textsize3*1.5)
+    text("Gebruik dit overzicht om alles bij te houden gedurende spelronde.", ((screen_xSize*0.05)+10), firstLine+(margin*2), (screen_xSize*0.80),textsize3*1.5)
+    text("Wanneer een winnaar bekend is van het spel, druk op de \"RESET\" knop om alles terug te zetten naar 0.", (screen_xSize*0.05)+10, firstLine+(margin*3), (screen_xSize*0.9),textsize3*1.5)
+    text('Gebruik de tab \"Dueleren\" wanneer je iemand aanvalt.', (screen_xSize*0.05)+10, firstLine+(margin*4), (screen_xSize*0.9),textsize1*1.5)
+    text('Gebruik de tab \"Shortcut\" wanneer je op het kruisingspunt zit voor de shortcut.', ((screen_xSize*0.05)+10), firstLine+(margin*5), (screen_xSize*0.9),textsize3*1.5)
+    text('Gebruik de tab \"Kaartregels\" als je de regels wilt weten van elke kaart.', ((screen_xSize*0.05)+10), firstLine+(margin*6), (screen_xSize*0.9),textsize3*1.5)
+    noFill()
+
+### Table layout of columns and rows with colors. 
+def drawTableText():
+    #Table name text
+    textAlign(CENTER,CENTER)
+    lib.fonts("Arial Bold", textsize0, True)
+    fill(255,255,255)
+    text("Gegevens overzicht van het spel", (screen_xSize*0.05), 120, (col+2)*OGfieldW ,textsize0*1.5)
+    noFill()
     
-    # ## Instruction box bg color
-    # lib.button(screen_xSize/100*5, 390, screen_xSize/100*90, endLine, radius, 200,200,200,150)
-    # ## Instruction text
-    # fill(100,0,100)
-    # textAlign(LEFT)
-    # lib.fonts("Ariel", textsize2, False)
-    # text('Instructies:', screen_xSize/100*5+10, firstLine, screen_xSize/100*90,textsize2*2)
-    # lib.fonts("Ariel", textsize3, False)
-    # margin = textsize3*1.5
-    # text("Vul eerst uw naam in bij de tab \"Namen\".", screen_xSize/100*5+10, firstLine+(textsize2*2), screen_xSize/100*90,textsize3*1.5)
-    # text("Gebruik dit overzicht om alles bij te houden gedurende spelronde.", screen_xSize/100*5+10, firstLine+(margin*2), screen_xSize/100*80,textsize3*1.5)
-    # text("Wanneer een winnaar bekend is van het spel, druk op de \"RESET\" knop om alles terug te zetten naar 0.", screen_xSize/100*5+10, firstLine+(margin*3), screen_xSize/100*90,textsize3*1.5)
-    # text('Gebruik de tab \"Dueleren\" wanneer je iemand aanvalt.', screen_xSize/100*5+10, firstLine+(margin*4), screen_xSize/100*90,textsize1*1.5)
-    # text('Gebruik de tab \"Shortcut\" wanneer je op het kruisingspunt zit voor de shortcut.', screen_xSize/100*5+10, firstLine+(margin*5), screen_xSize/100*90,textsize3*1.5)
-    # text('Gebruik de tab \"Kaartregels\" als je de regels wilt weten van elke kaart.', screen_xSize/100*5+10, firstLine+(margin*6), screen_xSize/100*90,textsize3*1.5)
-    # noFill()
+    # Text: Names in column 0.   
     
+    for x in range(len(spelerData)):
+        fill(0,0,0)
+        lib.fonts("Ariel", textsize1, True)
+        textAlign(LEFT,CENTER)
+        try:
+            if len(spelerData["speler"+str(x+1)]['name']) > 0:
+                text(str(spelerData["speler"+str(x+1)]['name']), (screen_xSize*0.05)+5, (120+(textsize1*1.5))+((x+2)*(textsize1*1.5)),200,(textsize1*1.5))
+            else:
+                text("Speler"+str(x+1), (screen_xSize*0.05)+5, (120+(textsize1*1.5))+((x+2)*(textsize1*1.5)), 200, (textsize1*1.5))
+        except IndexError:
+            print("Error at Function: DrawTableText() first part")
+        noFill()
+        
+        fill(255,0,0)
+        textAlign(CENTER,CENTER)
+        lib.fonts("Ariel", textsize3, True)
+        if x < len(colName):
+            try:
+                text(colName[x], (((screen_xSize*0.05)+200)+((x+4)*OGfieldW)), (120+((textsize1)*3)), OGfieldW, textsize2*1.5)
+            except IndexError:
+                print("Error at Function: DrawTableText() second part")
+        noFill()
+    
+    ### Third row, column names.
+    lib.fonts("Arial Bold", textsize2, True)
+    fill(255,255,255)
+    textAlign(CENTER, CENTER)
+    text('Verslagen kleur', (screen_xSize*0.05)+205, (120+((textsize1)*2)), (len(spelerData))*OGfieldW, textsize2*1.5)
+    
+### Table Data.    
+def drawTableData(spelerData,Row):
+    fill(255,0,0)
+    textAlign(CENTER,CENTER)
+    lib.fonts("Ariel", textsize3, True)
+    # Left half table
+    try:
+        x = 1    
+        text(str(spelerData["speler1"]['data'][0]), (((screen_xSize*0.05)+200)+(1*OGfieldW)), (120+(textsize1*1.5)+((2*(textsize1*1.5)))), OGfieldW, textsize1*1.5)
+        text(str(spelerData["speler1"]['data'][1]), (((screen_xSize*0.05)+200)+(2*OGfieldW)), (120+(textsize1*1.5)+((2*(textsize1*1.5)))), OGfieldW, textsize1*1.5)
+        text(str(spelerData["speler1"]['data'][2]), (((screen_xSize*0.05)+200)+(3*OGfieldW)), (120+(textsize1*1.5)+((2*(textsize1*1.5)))), OGfieldW, textsize1*1.5)
+        x = 2
+        text(str(spelerData["speler2"]['data'][0]), (((screen_xSize*0.05)+200)+(0*OGfieldW)), (120+(textsize1*1.5)+((3*(textsize1*1.5)))), OGfieldW, textsize1*1.5)
+        text(str(spelerData["speler2"]['data'][1]), (((screen_xSize*0.05)+200)+(2*OGfieldW)), (120+(textsize1*1.5)+((3*(textsize1*1.5)))), OGfieldW, textsize1*1.5)
+        text(str(spelerData["speler2"]['data'][2]), (((screen_xSize*0.05)+200)+(3*OGfieldW)), (120+(textsize1*1.5)+((3*(textsize1*1.5)))), OGfieldW, textsize1*1.5)
+        x = 3
+        text(str(spelerData["speler3"]['data'][0]), (((screen_xSize*0.05)+200)+(0*OGfieldW)), (120+(textsize1*1.5)+((4*(textsize1*1.5)))), OGfieldW, textsize1*1.5)
+        text(str(spelerData["speler3"]['data'][1]), (((screen_xSize*0.05)+200)+(1*OGfieldW)), (120+(textsize1*1.5)+((4*(textsize1*1.5)))), OGfieldW, textsize1*1.5)
+        text(str(spelerData["speler3"]['data'][2]), (((screen_xSize*0.05)+200)+(3*OGfieldW)), (120+(textsize1*1.5)+((4*(textsize1*1.5)))), OGfieldW, textsize1*1.5)
+        x = 4
+        text(str(spelerData["speler4"]['data'][0]), (((screen_xSize*0.05)+200)+(0*OGfieldW)), (120+(textsize1*1.5)+((5*(textsize1*1.5)))), OGfieldW, textsize1*1.5)
+        text(str(spelerData["speler4"]['data'][1]), (((screen_xSize*0.05)+200)+(1*OGfieldW)), (120+(textsize1*1.5)+((5*(textsize1*1.5)))), OGfieldW, textsize1*1.5)
+        text(str(spelerData["speler4"]['data'][2]), (((screen_xSize*0.05)+200)+(2*OGfieldW)), (120+(textsize1*1.5)+((5*(textsize1*1.5)))), OGfieldW, textsize1*1.5)
+    except IndexError:
+        print("Error at Function: DrawTableText() first half table part")
+    noFill()
+    # Right half table
+    for x in range(3):
+        for y in range(Row):
+            try:
+                text(str(spelerData["speler"+str(y+1)]['data'][x+3]), (((screen_xSize*0.05)+200)+((x+5)*OGfieldW)), (120+(textsize1*1.5)+((y+2)*(textsize1*1.5))), OGfieldW, textsize1*1.5)
+            except IndexError:
+                print(x)
+                print("Error at Function: DrawTableText() second half table part")
+    noFill()
+                    
+### Table layout of columns and rows with colors. 
+def drawTable():
+    stroke(0,0,0)
+    strokeWeight(1)
+    offsetRow = 2
+    for y in range(row+offsetRow+1):
+        for x in range(col):
+            if y > offsetRow:
+                lib.field_colors(y-(offsetRow))
+                rect(screen_xSize*0.05, (120+(y*(textsize1*1.5))), 200, textsize1*1.5)  #column 1
+                noFill()
+                if x == 4:
+                    fill(0,100,200) # Blue cell for Totaal column
+                else:
+                    fill(255,255,255) # White cells
+            else:
+                fill(0,0,0) # Black Cells
+                rect(screen_xSize*0.05, (120+(y*(textsize1*1.5))), 200, textsize1*1.5)
+            rect(((screen_xSize*0.05)+200)+(x*OGfieldW), (120+(y*(textsize1*1.5))), OGfieldW,textsize1*1.5)
+            
+            if x < len(spelerData):
+                '''Color column RGBY horizontal.'''
+                lib.field_colors(x+1)
+                rect(((screen_xSize*0.05)+200)+(x*OGfieldW), 120+(textsize1*1.5)+(textsize1*2), OGfieldW,(textsize1))
+                
+                ### Invalid box (GREY rectangles) on table.
+                lib.button(((screen_xSize*0.05)+200)+(x*OGfieldW), (120+(2*(textsize1*1.5)))+((x+1)*textsize1*1.5), OGfieldW,(textsize1*1.5),0,100,100,100)
+            elif y > 2:
+                line(((screen_xSize*0.05)+200)+(x*OGfieldW),(120)+(y*textsize1*1.5), ((screen_xSize*0.05)+200)+(x*OGfieldW),(120+(textsize1*1.5))+(y*textsize1*1.5))
+
+    '''Color column RGBY vertical.'''
+    #Names column background
+    for y in range(len(spelerData)+3):
+        offset = 2
+        
+            
 def Reset(What2Reset):
     global Rood_tegen_Groen,Rood_tegen_Blauw, Rood_tegen_Geel
     global Groen_tegen_Rood, Groen_tegen_Blauw,Groen_tegen_Geel
