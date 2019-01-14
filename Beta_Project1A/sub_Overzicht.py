@@ -71,7 +71,7 @@ def drawTableInstructions():
     text("Vul eerst uw naam in bij de tab \"Namen\".", ((screen_xSize*0.05)+10),((screen_ySize*0.6)+10)+(textsize2*2), (screen_xSize*0.9),textsize3*1.5)
     text("Gebruik dit overzicht om alles bij te houden gedurende spelronde.", ((screen_xSize*0.05)+10), ((screen_ySize*0.6)+10)+((textsize2*2)*2), (screen_xSize*0.9),textsize3*1.5)
     text("Wanneer een winnaar bekend is van het spel, druk op de \"RESET\" knop om alles terug te zetten naar 0.", (screen_xSize*0.05)+10, ((screen_ySize*0.6)+10)+((textsize2*2)*3), (screen_xSize*0.9),textsize3*1.5)
-    text('Gebruik de tab \"Dueleren\" wanneer je iemand aanvalt.', (screen_xSize*0.05)+10, ((screen_ySize*0.6)+10)+((textsize2*2)*4), (screen_xSize*0.9),textsize1*1.5)
+    text('Gebruik de tab \"Duelleren\" wanneer je iemand aanvalt.', (screen_xSize*0.05)+10, ((screen_ySize*0.6)+10)+((textsize2*2)*4), (screen_xSize*0.9),textsize1*1.5)
     text('Gebruik de tab \"Shortcut\" wanneer je op het kruisingspunt zit voor de shortcut.', ((screen_xSize*0.05)+10), ((screen_ySize*0.6)+10)+((textsize2*2)*5), (screen_xSize*0.9),textsize3*1.5)
     text('Gebruik de tab \"Kaartregels\" als je de regels wilt weten van elke kaart.', ((screen_xSize*0.05)+10), ((screen_ySize*0.6)+10)+((textsize2*2)*6), (screen_xSize*0.9),textsize3*1.5)
     noFill()
@@ -97,7 +97,7 @@ def drawTableText(spelerData):
             text("Speler"+str(x+1), (screen_xSize*0.05)+5, (120+(textsize1*1.5))+((x+2)*(textsize1*1.5)), 200, (textsize1*1.5))
         noFill()
         
-        fill(255,0,0)
+        fill(255,255,255)
         textAlign(CENTER,CENTER)
         lib.fonts("Ariel", textsize3, True)
         if x < len(colName):
@@ -139,11 +139,13 @@ def drawTableData(Data,Row):
         print("Error at Function: DrawTableText() first half table part")
     noFill()
     # Right half table
-    fill(0,0,0)
     for x in range(3):
         for y in range(Row):
             try:
+                fill(255,255,255)
                 text(str(Data["speler"+str(y+1)]['data'][0]+Data["speler"+str(y+1)]['data'][1]+Data["speler"+str(y+1)]['data'][2]), (((screen_xSize*0.05)+200)+(4*OGfieldW)), (120+(textsize1*1.5)+((y+2)*(textsize1*1.5))), OGfieldW, textsize1*1.5)
+                noFill()
+                fill(0,0,0)
                 text(str(Data["speler"+str(y+1)]['data'][x+3]), (((screen_xSize*0.05)+200)+((x+5)*OGfieldW)), (120+(textsize1*1.5)+((y+2)*(textsize1*1.5))), OGfieldW, textsize1*1.5)
             except IndexError:
                 print("Error at Function: DrawTableText() second half table part")
