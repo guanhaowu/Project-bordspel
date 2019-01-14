@@ -12,7 +12,7 @@ def setup():
     # Kaart photo saved to kaart list
     for i in range (1,14):
         kaarten = loadImage(str(i)+".jpg")
-        #kaarten.resize(230,250)  
+        #kaarten.resize(card_xSize,card_ySize)  
         kaart.append(kaarten) 
         
 

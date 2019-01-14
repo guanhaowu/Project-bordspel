@@ -1,7 +1,7 @@
 ### Screen Size.
 def getScreenSize():
     screen_xSize = 1200
-    screen_ySize = 900
+    screen_ySize = 800
     return screen_xSize, screen_ySize
 
 ### Default page.
@@ -32,16 +32,20 @@ def getCardSize():
     y= 250
     return x,y
 
+### Plus & Minus icon resize
+def getIconSize():
+    x = getTextSize(1)*1.2
+    y = x
+    return x,y
+
 ### OverzichtGegevens Tab content.
 def OverzichtData(type):
     if type == 'data':
         # Initial Data for Namen
-        player = {
-                       'speler1':{'name':'', 'data':[0, 1, 2, 3, 4, 5]},
-                       'speler2':{'name':'', 'data':[0, 5, 0, 1, 2, 2]},
-                       'speler3':{'name':'', 'data':[0, 6, 0, 5, 4, 9]},
-                       'speler4':{'name':'', 'data':[0, 7, 0, 2, 8, 3]}
-                       }
+        player = {'speler1':{'name':'', 'data':[0, 0, 0, 0, 0, 0]},
+                  'speler2':{'name':'', 'data':[0, 0, 0, 0, 0, 0]},
+                  'speler3':{'name':'', 'data':[0, 0, 0, 0, 0, 0]},
+                  'speler4':{'name':'', 'data':[0, 0, 0, 0, 0, 0]}}
         return player
     
     if type == 'colName':
@@ -75,7 +79,26 @@ def getInputField(tab, args):
     if tab =='overzicht' and args =='height':
         inputFieldHeight = getTextSize(1)*1.5
         return inputFieldHeight
-    
+
+### Reset buttons for Overzicht.
+def getResetKnop(type, screen_xSize, screen_ySize):
+    if type == 'ResetAll':
+        #Reset alles BTN setting
+        resetBtnStartX = screen_xSize*0.05
+        resetBtnEndX = 200 #button width from resetBtnStartX
+        resetBtnStartY = screen_ySize*0.5 #button height from top
+        resetBtnEndY = 35 #height from resetBtnStartY
+        return resetBtnStartX, resetBtnEndX, resetBtnStartY, resetBtnEndY
+
+    if type == 'ResetReeks':
+        #Reset Reeks BTN setting
+        resetReeksBtnStartX = screen_xSize*0.76
+        resetReeksBtnEndX = 150 #button width from resetReeksBtnStartX
+        resetReeksBtnStartY = screen_ySize*0.5 #button height from top
+        resetReeksBtnEndY = 35 #height from resetReeksBtnStartY
+        return resetReeksBtnStartX, resetReeksBtnEndX, resetReeksBtnStartY, resetReeksBtnEndY
+        
+                
 ### Dueleren Tab.
 # amount of dices Attacker have
 def getDiceCounter():
@@ -102,7 +125,7 @@ def getTextSize(num):
         return textsize3
 
 ### DEBUG.
-def debug(type, *args):
+def debug(type, args):
     if type == 'mouse':
-        debug_MouseLoc = True
+        debug_MouseLoc = args
     return debug_MouseLoc
